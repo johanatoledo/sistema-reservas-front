@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import baileShow from '../assets/videos/baileShow.MP4';
+import baileShow from '../assets/videos/baileShow.mp4';
 
 
 
