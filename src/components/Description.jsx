@@ -1,5 +1,5 @@
 import React from 'react';
-import entrada from '../assets/environments/entrada.jpg';
+import entrada from '../assets/entrada.jpg';
 
 /**
  * Componente Description:

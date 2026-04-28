@@ -1,21 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import 'keen-slider/keen-slider.min.css';
+import s4m4 from '/environments/s4m4.jpg';
+import s3 from '/environments/s3.jpg';
+import box1 from '/environments/box-1.jpeg';
+
 
 const environments = [
   {
     name: 'Salones',
     description: 'Ambientes tranquilos con decoración tradicional limeña, ideales para almuerzos y cenas familiares.',
-    image: '/src/assets/environments/s4m4.jpg',
+    image: s4m4,
   },
   {
     name: 'Salón Principal',
     description: 'Espacio señorial con decoración limeña y mesas amplias.',
-    image: '/src/assets/environments/s3.jpg',
+    image: s3,
   },
   {
     name: 'Terraza',
     description: 'Ambientes disponibles para disfrutar en familia y amigos domingos de tradicion limeña.',
-    image: '/src/assets/environments/box-1.jpeg',
+    image: box1,
   },
 ];
 
