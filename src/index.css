@@ -1,0 +1,64 @@
+@import "tailwindcss";
+
+/* 1. IMPORTACIÓN DE FUENTES EXTERNAR */
+/* Se recomienda ponerlas fuera de cualquier bloque para evitar advertencias de procesamiento */
+@import url('https://fonts.googleapis.com/css2?family=Cardo:ital,wght@0,400;0,700;1,400&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+
+/* 2. VARIABLES CSS EN :root PARA USO OPCIONAL */
+:root {
+  --color-limenita-taupe: #8C7B5D;
+  --color-limenita-crema: #F3E5DC;
+  --color-limenita-oro: #C5A059;
+  --color-limenita-zafiro: #2B4E9E;
+  --color-limenita-madera: #4A3E31;
+  --font-display: "Playfair Display", serif;
+  --font-body: "Cardo", serif;
+}
+
+/* 3. ESTILOS BASE Y CORRECCIÓN DE ADVERTENCIAS */
+@layer base {
+  /* Usamos los nombres de variables generados por Tailwind para evitar que PostCSS se pierda */
+  html, body {
+    margin: 0;
+    padding: 0;
+    /* En v4 usamos las variables directas del tema para asegurar la carga */
+    background-color: var(--color-limenita-crema);
+    color: var(--color-limenita-oro);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+
+  #root {
+    /* Priorizamos la fuente del tema */
+    font-family: var(--font-body);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Silenciamos advertencias de componentes que no usan @apply todavía */
+  h1, h2, h3 {
+    font-family: var(--font-display);
+  }
+}
+
+
+@layer utilities {
+  .bg-damasco-overlay {
+    background-image: 
+      linear-gradient(to bottom, rgba(140, 123, 93, 0.85), rgba(140, 123, 93, 0.85)),
+      url('/src/assets/texture/damasco-limeñita.jpeg');
+    background-repeat: repeat;
+  }
+
+  /* Clase para ocultar scrollbar en la navegación de categorías del menú */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
