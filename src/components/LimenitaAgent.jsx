@@ -107,7 +107,7 @@ export default function LimenitaAgent({ isOpen, onClose, avatarSrc }) {
   const llamarApi = useCallback(async (historial) => {
     const response = await fetch(`${BASEURL}/api/chat`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json','Bypass-Tunnel-Reminder': 'true'}, 
       body: JSON.stringify({
         messages: historial.map(({ role, content }) => ({ role, content })),
       }),
