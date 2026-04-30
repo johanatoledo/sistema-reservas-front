@@ -59,19 +59,34 @@ const Typing = ({ avatarSrc }) => (
     className="flex items-end gap-2 justify-start"
   >
     <div className="flex-shrink-0 w-9 h-9 rounded-full overflow-hidden border-2 border-limenita-oro shadow-md">
-      <img src={avatarSrc} alt="Limeñita escribiendo" className="w-full h-full object-cover object-top" />
+      <img
+        src={avatarSrc}
+        alt="Limeñita escribiendo"
+        className="w-full h-full object-cover object-top"
+      />
     </div>
+
     <div className="bg-white border-l-4 border-limenita-zafiro px-4 py-3 rounded-t-2xl rounded-br-2xl rounded-bl-sm shadow-sm">
-      <span className="flex gap-1 items-center h-4">
+      <div className="flex gap-1.5 items-center h-4">
         {[0, 1, 2].map((i) => (
           <motion.span
             key={i}
-            className="w-1.5 h-2 rounded-full bg-limenita-taupe inline-block"
-            animate={{ y: [0, -4, 0] }}
-            transition={{ duration: 0.6, repeat: Infinity, delay: i * 0.15 }}
+            className="w-2 h-2 rounded-full bg-limenita-taupe inline-block"
+            animate={{
+              y: [0, -5, 0],
+              opacity: [0.4, 1, 0.4],
+              scale: [1, 1.15, 1],
+            }}
+            transition={{
+              duration: 0.7,
+              repeat: Infinity,
+              repeatType: "loop",
+              ease: "easeInOut",
+              delay: i * 0.18,
+            }}
           />
-        ))}...
-      </span>
+        ))}
+      </div>
     </div>
   </motion.div>
 );
