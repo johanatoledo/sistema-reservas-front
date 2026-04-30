@@ -48,6 +48,7 @@ function AppContent({ setLocale, locale }) {
   const inicioRef = useRef(null);
   const cartaRef = useRef(null);
 
+  const isFormularioInvitados = location.pathname.startsWith('/formulario-invitados');
   //Scroll helpers
 
   const scrollToRef = (ref) => {
@@ -101,13 +102,15 @@ function AppContent({ setLocale, locale }) {
 
   return (
     <div className="bg-limenita-taupe min-h-screen text-limenita-crema">
-      <Navbar 
-        setLocale={setLocale} 
-        locale={locale} 
-         onReservaClick={() => setIsAgentOpen(true)}
-        onNavClick={handleNavClick} 
-        activeSection={activeSection}
-      />
+      {!isFormularioInvitados && (
+        <Navbar 
+          setLocale={setLocale} 
+          locale={locale} 
+          onReservaClick={() => setIsAgentOpen(true)}
+          onNavClick={handleNavClick} 
+          activeSection={activeSection}
+        />
+      )}
       
       <Routes>
         <Route path="/" element={<LandingPage inicioRef={inicioRef} cartaRef={cartaRef} activeSection={activeSection} />} />
@@ -115,13 +118,16 @@ function AppContent({ setLocale, locale }) {
           <Route path="/formulario-invitados/:reservaId" element={<FormularioInvitadosCorporativo />} />
       </Routes>
       
-      {/* Agente IA — siempre montado para preservar historial */}
-      <LimenitaAgent
-        isOpen={isAgentOpen}
-        onClose={() => setIsAgentOpen(false)}
-        avatarSrc={agentelime}
-      />
-      <Footer />
+        {!isFormularioInvitados && (
+        <LimenitaAgent
+          isOpen={isAgentOpen}
+          onClose={() => setIsAgentOpen(false)}
+          avatarSrc={agentelime}
+        />
+      )}
+
+      {!isFormularioInvitados && <Footer />}
+      
     </div>
   );
 }

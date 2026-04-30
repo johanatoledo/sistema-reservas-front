@@ -11,6 +11,43 @@ const BIENVENIDA = {
     'Bienvenido a Limeñita. Es un placer atenderte.¿Desea hacer una reserva  personal (familia, cita, amigos) o corporativa (empresa)?',
 };
  const BASEURL = import.meta.env.VITE_BACKEND_URL || '';
+
+
+ const renderContentWithLinks = (text = '') => {
+  const markdownLinkRegex = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g;
+
+  const parts = [];
+  let lastIndex = 0;
+  let match;
+
+  while ((match = markdownLinkRegex.exec(text)) !== null) {
+    const [fullMatch, label, url] = match;
+
+    if (match.index > lastIndex) {
+      parts.push(text.slice(lastIndex, match.index));
+    }
+
+    parts.push(
+      <a
+        key={`${url}-${match.index}`}
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-block mt-2 text-limenita-zafiro font-bold underline hover:text-limenita-madera transition"
+      >
+        {label}
+      </a>
+    );
+
+    lastIndex = match.index + fullMatch.length;
+  }
+
+  if (lastIndex < text.length) {
+    parts.push(text.slice(lastIndex));
+  }
+
+  return parts;
+};
 // ─────────────────────────────────────────────────────────
 //  Burbuja de mensaje
 // ─────────────────────────────────────────────────────────
@@ -24,7 +61,6 @@ const Burbuja = ({ msg, avatarSrc }) => {
       transition={{ duration: 0.25 }}
       className={`flex items-end gap-2 ${esBot ? 'justify-start' : 'justify-end'}`}
     >
-      {/* Avatar del agente — solo en mensajes del bot */}
       {esBot && (
         <div className="flex-shrink-0 w-9 h-9 rounded-full overflow-hidden border-2 border-limenita-oro shadow-md">
           <img
@@ -42,12 +78,11 @@ const Burbuja = ({ msg, avatarSrc }) => {
             : 'bg-limenita-zafiro text-limenita-crema rounded-t-2xl rounded-bl-2xl rounded-br-sm'
         }`}
       >
-        {msg.content}
+        {esBot ? renderContentWithLinks(msg.content) : msg.content}
       </div>
     </motion.div>
   );
 };
-
 // ─────────────────────────────────────────────────────────
 //  Indicador de escritura (tres puntos animados)
 // ─────────────────────────────────────────────────────────
