@@ -58,7 +58,7 @@ const Typing = ({ avatarSrc }) => (
     exit={{ opacity: 0 }}
     className="flex items-end gap-2 justify-start"
   >
-    <div className="flex-shrink-0 w-9 h-9 rounded-full overflow-hidden border-2 border-limenita-oro shadow-md">
+    <div className="flex-shrink-0 w-9 h-9 rounded-full overflow-hidden border-2 border-yellow-500 shadow-md">
       <img
         src={avatarSrc}
         alt="Limeñita escribiendo"
@@ -66,21 +66,19 @@ const Typing = ({ avatarSrc }) => (
       />
     </div>
 
-    <div className="bg-white border-l-4 border-limenita-zafiro px-4 py-3 rounded-t-2xl rounded-br-2xl rounded-bl-sm shadow-sm">
-      <div className="flex gap-1.5 items-center h-4">
+    <div className="bg-white border-l-4 border-blue-700 px-4 py-3 rounded-t-2xl rounded-br-2xl rounded-bl-sm shadow-sm">
+      <div className="flex items-center gap-2 min-w-[44px] min-h-[16px]">
         {[0, 1, 2].map((i) => (
           <motion.span
             key={i}
-            className="w-2 h-2 rounded-full bg-limenita-taupe inline-block"
+            className="block w-2.5 h-2.5 rounded-full bg-gray-700"
             animate={{
               y: [0, -5, 0],
-              opacity: [0.4, 1, 0.4],
-              scale: [1, 1.15, 1],
+              opacity: [0.35, 1, 0.35],
             }}
             transition={{
               duration: 0.7,
               repeat: Infinity,
-              repeatType: "loop",
               ease: "easeInOut",
               delay: i * 0.18,
             }}
