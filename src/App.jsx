@@ -112,7 +112,7 @@ function AppContent({ setLocale, locale }) {
       <Routes>
         <Route path="/" element={<LandingPage inicioRef={inicioRef} cartaRef={cartaRef} activeSection={activeSection} />} />
          <Route path="/asistente" element={<ReservasTable />} />
-          <Route path="/formulario-invitados/:tokenReserva" element={<FormularioInvitadosCorporativo />} />
+          <Route path="/formulario-invitados/:reservaId" element={<FormularioInvitadosCorporativo />} />
       </Routes>
       
       {/* Agente IA — siempre montado para preservar historial */}

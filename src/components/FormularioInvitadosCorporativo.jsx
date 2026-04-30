@@ -11,8 +11,8 @@ const FormularioInvitadosCorporativo = () => {
   // 1. CAPTURA DEL ID DE RESERVA
   // ═══════════════════════════════════════
   // Extraemos id o tokenReserva 
-  const { id, tokenReserva } = useParams();
-  const idReservaUrl = id || tokenReserva;
+ const { reservaId } = useParams();
+const idReservaUrl = reservaId;
 
   const [reservaData, setReservaData] = useState(null);
   const [errorToken, setErrorToken] = useState(false);
