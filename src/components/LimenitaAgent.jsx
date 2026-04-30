@@ -8,9 +8,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 const BIENVENIDA = {
   role: 'assistant',
   content:
-    'Bienvenido a Limeñita. Es un placer atenderte. Me indica por favor que tipo de reserva desea realizar:Personal o Corporativa?',
+    'Bienvenido a Limeñita. Es un placer atenderte.¿Desea hacer una reserva  personal (familia, cita, amigos) o corporativa (empresa)?',
 };
-
+ const BASEURL = import.meta.env.VITE_BACKEND_URL || '';
 // ─────────────────────────────────────────────────────────
 //  Burbuja de mensaje
 // ─────────────────────────────────────────────────────────
@@ -66,11 +66,11 @@ const Typing = ({ avatarSrc }) => (
         {[0, 1, 2].map((i) => (
           <motion.span
             key={i}
-            className="w-1.5 h-1.5 rounded-full bg-limenita-taupe inline-block"
+            className="w-1.5 h-2 rounded-full bg-limenita-taupe inline-block"
             animate={{ y: [0, -4, 0] }}
             transition={{ duration: 0.6, repeat: Infinity, delay: i * 0.15 }}
           />
-        ))}
+        ))}...
       </span>
     </div>
   </motion.div>
@@ -83,9 +83,9 @@ export default function LimenitaAgent({ isOpen, onClose, avatarSrc }) {
   const [messages, setMessages]       = useState([BIENVENIDA]);
   const [input, setInput]             = useState('');
   const [loading, setLoading]         = useState(false);
-  const [mostrarUpload, setMostrarUpload] = useState(false);
   const bottomRef                     = useRef(null);
   const inputRef                      = useRef(null);
+
 
   // Auto-scroll al último mensaje
   useEffect(() => {
@@ -106,19 +106,29 @@ export default function LimenitaAgent({ isOpen, onClose, avatarSrc }) {
 
   // ── Llamada al backend ─────────────────────────────────
   const llamarApi = useCallback(async (historial) => {
-    const response = await fetch('/api/chat', {
+    console.log('🔌 Iniciando llamada a API con historial:', historial);
+    
+    const response = await fetch(`${BASEURL}/api/chat`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      mode: 'cors',
+      headers: { 
+        'Content-Type': 'application/json',
+        'Bypass-Tunnel-Reminder': 'true'
+      }, 
       body: JSON.stringify({
         messages: historial.map(({ role, content }) => ({ role, content })),
       }),
     });
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const data = await response.json();
-
-    if (data?.tool_called === 'activar_lista_invitados') {
-      setMostrarUpload(true);
+    
+    console.log('📡 Respuesta del servidor:', response.status);
+    
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
     }
+    
+    const data = await response.json();
+    console.log('📥 Datos recibidos:', data);
+
     return (
       data?.result?.content ||
       'Disculpe, no pude procesar su solicitud. ¿Podría repetirla?'
@@ -126,21 +136,30 @@ export default function LimenitaAgent({ isOpen, onClose, avatarSrc }) {
   }, []);
 
  
-  
-  // ── Envío de mensaje del usuario ─────────────────────
   const enviarMensaje = async (textoInput) => {
     const texto = (textoInput || input).trim();
-    if (!texto || loading) return;
+    console.log('🚀 enviarMensaje llamado con:', texto, 'loading:', loading);
+    
+    if (!texto || loading) {
+      console.log('⚠️ Mensaje vacío o ya estoy cargando, saliendo');
+      return;
+    }
 
     const nuevoHistorial = [...messages, { role: 'user', content: texto }];
     setMessages(nuevoHistorial);
     setInput('');
     setLoading(true);
+    console.log('✅ Loading set a TRUE');
 
     try {
+      console.log('📤 Enviando mensaje:', texto);
       const respuesta = await llamarApi(nuevoHistorial);
+      console.log('📥 Respuesta recibida:', respuesta);
       setMessages((prev) => [...prev, { role: 'assistant', content: respuesta }]);
-    } catch {
+    } catch (error) {
+      console.error('❌ Error en llamarApi:', error);
+      console.error('Detalles:', error.message);
+      
       setMessages((prev) => [
         ...prev,
         {
@@ -151,46 +170,13 @@ export default function LimenitaAgent({ isOpen, onClose, avatarSrc }) {
       ]);
     } finally {
       setLoading(false);
+      console.log('✅ Loading set a FALSE');
     }
   };
 
-   // ── Manejador de subida de archivos ─────────────────────
-const handleFileUpload = async (e) => {
-  const file = e.target.files[0];
-  if (!file) return;
+   
 
-  const formData = new FormData();
-  formData.append('invitados', file);
-
-  try {
-    setLoading(true);
-    const response = await fetch('/api/upload', {
-      method: 'POST',
-      body: formData,
-    });
-
-    const data = await response.json();
-
-    if (data.success) {
-      setMostrarUpload(false);
-      
-      // En lugar de enviar un mensaje visible, notificamos a la IA 
-      // y añadimos un mensaje de confirmación amigable para el usuario.
-      const confirmacionSistema = `Sistema: El archivo se subió con éxito. Nombre: ${data.fileName}.`;
-      
-      // Llamamos a enviarMensaje pasando el nombre del archivo 
-      // para que la IA lo guarde en su contexto.
-      await enviarMensaje(`He subido la lista de invitados correctamente. (Archivo: ${data.fileName})`);
-    }
-  } catch (error) {
-    console.error("Error al subir archivo:", error);
-    alert("Hubo un error al subir el archivo. Intente de nuevo.");
-  } finally {
-    setLoading(false);
-  }
-};
-
-// ── Manejador de teclas ─────────────────────────────────────────────
+  // ── Manejador de teclas ─────────────────────────────────────────────
   const handleKey = (e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
@@ -276,58 +262,13 @@ const handleFileUpload = async (e) => {
                 <Burbuja key={i} msg={msg} avatarSrc={avatarSrc} />
               ))}
 
-              <AnimatePresence mode="wait">
-                {loading && <Typing key="typing-indicator" avatarSrc={avatarSrc} />}
-              </AnimatePresence>
-              <div ref={bottomRef} />
-
-
-              {/* ── BOTÓN DE SUBIDA DE ARCHIVOS (solo para reservas corporativas) ────────────────────────────── */}
-              {mostrarUpload && (
-                <div className="mt-4 p-4 bg-limenita-oro/20 border border-limenita-oro rounded-lg text-center">
-                  <p className="text-sm text-limenita-madera mb-2"> Por favor, suba el archivo con la lista de invitados para su reserva corporativa:</p>
-                  <input
-                    type="file"
-                    accept=".xlsx, .xls, .csv"
-                    onChange={handleFileUpload}
-                    className="hidden"
-                  />
-                  <AnimatePresence>
-                       {mostrarUpload && (
-                         <motion.div
-                         initial={{ opacity: 0, scale: 0.95 }}
-                         animate={{ opacity: 1, scale: 1 }}
-                         exit={{ opacity: 0, scale: 0.95 }}
-                         className="p-4 border-2 border-dashed border-limenita-oro bg-white/50 rounded-xl space-y-3 shadow-inner"
-                         >
-                     <p className="text-limenita-madera font-display text-[11px] uppercase tracking-widest text-center font-bold">
-                      📁 Adjuntar Lista de Invitados (Excel o PDF)
-                     </p>
-                          <input 
-                            type="file" 
-                            accept=".pdf,.xlsx,.xls,.doc,.docx"
-                            onChange={handleFileUpload}
-                            className="block w-full text-[10px] text-limenita-taupe
-                            file:mr-3 file:py-2 file:px-4
-                            file:rounded-full file:border-0
-                            file:text-[10px] file:font-bold file:uppercase
-                            file:bg-limenita-zafiro file:text-limenita-crema
-                             hover:file:bg-limenita-madera transition-all cursor-pointer"
-                     />
-          </motion.div>
-    )}
-  </AnimatePresence>
-
-  <AnimatePresence>
-    {loading && <Typing avatarSrc={avatarSrc} />}
-  </AnimatePresence>
-
-  <div ref={bottomRef} />
-                </div>
+              {/* 🔧 INDICADOR DE ESCRITURA - SIN AnimatePresence */}
+              {loading && (
+                <Typing avatarSrc={avatarSrc} />
               )}
 
+              <div ref={bottomRef} />
             </div>
-
             
             {/* ── INPUT ───────────────────────────────── */}
             <div className="flex-shrink-0 border-t border-limenita-taupe/30 bg-white px-3 py-3 flex items-end gap-2">
