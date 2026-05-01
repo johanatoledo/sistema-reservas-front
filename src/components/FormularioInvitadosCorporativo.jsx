@@ -280,7 +280,7 @@ const idReservaUrl = reservaId;
               {invitados.length > 0 && (
                 <button 
                   onClick={() => setProcesoActivo('menu')}
-                  className="py-3 bg-[#c4a484] text-white font-black uppercase tracking-wide rounded-xl shadow-2xl hover:bg-[#b39373] transition-all mt-8 border-b-4 border-[#a38363]"
+                  className="py-6 bg-[#c4a484] text-white font-black uppercase tracking-wide rounded-xl shadow-2xl hover:bg-[#b39373] transition-all mt-8 border-b-4 border-[#a38363]"
                 >
                   Siguiente: Seleccionar Menú →
                 </button>
@@ -313,7 +313,7 @@ const idReservaUrl = reservaId;
                       <div className="space-y-2 mb-6">
                         {inv.menuSeleccionado.map(p => (
                           <div key={p.id} className="flex justify-between items-center bg-[#fdfaf5] border border-[#d4c5b9]/30 p-3 rounded-xl">
-                            <span className="font-bold text-[#4a3728]">🍴 {p.nombre}</span>
+                            <span className="font-bold text-[#4a3728]"> {p.nombre}</span>
                             <span className="text-[#1e3a5f] font-black">S/ {p.price || p.precio}</span>
                           </div>
                         ))}
@@ -321,7 +321,7 @@ const idReservaUrl = reservaId;
 
                       {/* SELECTOR DESPLEGABLE */}
                       <select 
-                        className="w-full p-4 border-2 border-[#d4c5b9] rounded-xl bg-white text-[#4a3728] font-bold focus:ring-4 focus:ring-[#1e3a5f]/10 outline-none cursor-pointer"
+                        className="w-full p-6 border-2 border-[#d4c5b9] rounded-xl bg-white text-[#4a3728] font-bold focus:ring-4 focus:ring-[#1e3a5f]/10 outline-none cursor-pointer"
                         onChange={(e) => {
                           const val = e.target.value;
                           if (!val) return;

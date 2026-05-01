@@ -67,15 +67,15 @@ const ReservasTable = () => {
   const getEstadoPago = (idTransaccion, estado_pago) => {
     if (estado_pago === 'confirmado' || idTransaccion) {
       return {
-        label: 'CONFIRMADO',
+        label: 'CON ADELANTO',
         color: 'bg-green-100 text-green-700 border-green-300',
-        icon: '✓'
+        icon: '💸'
       };
     }
     return {
       label: 'SIN ADELANTO',
-      color: 'bg-amber-100 text-amber-700 border-amber-300',
-      icon: '⏱'
+      color: 'bg-amber-100 text-red-700 border-amber-300',
+      icon: '❌'
     };
   };
 
