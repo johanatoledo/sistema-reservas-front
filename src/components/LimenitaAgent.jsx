@@ -101,12 +101,12 @@ const Typing = ({ avatarSrc }) => (
       />
     </div>
 
-    <div className="bg-white border-l-4 border-blue-700 px-4 py-3 rounded-t-2xl rounded-br-2xl rounded-bl-sm shadow-sm">
+    <div className="bg-white border-l-4 border-limenita-oro px-4 py-3 rounded-t-2xl rounded-br-2xl rounded-bl-sm shadow-sm">
       <div className="flex items-center gap-2 min-w-[44px] min-h-[16px]">
         {[0, 1, 2].map((i) => (
           <motion.span
             key={i}
-            className="block w-2.5 h-2.5 rounded-full bg-gray-700"
+            className="block w-1 h-1 rounded-full bg-gray-700"
             animate={{
               y: [0, -5, 0],
               opacity: [0.35, 1, 0.35],

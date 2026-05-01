@@ -185,9 +185,9 @@ const idReservaUrl = reservaId;
     <div className="min-h-screen bg-[#fdfaf5] pb-12">
       
       {/* ENCABEZADO EXCLUSIVO (Sin opciones de Navbar) */}
-      <div className="bg-[#1e3a5f] w-full py-6 flex flex-col items-center justify-center shadow-md mb-8">
-        <h1 className="text-4xl font-serif text-white tracking-[0.15em] uppercase">Limeñita</h1>
-        <p className="text-[#c4a484] text-xs font-bold tracking-[0.3em] mt-2 uppercase text-center px-4">Registro de Invitados Corporativos</p>
+      <div className="bg-limenita-taupe/10 w-full py-6 flex flex-col items-center justify-center shadow-md mb-8">
+        <h1 className="text-4xl font-serif text-limenita-oro tracking-[0.15em] uppercase">Limeñita</h1>
+        <p className="text-limenita-oro text-xs font-bold tracking-[0.3em] mt-2 uppercase text-center px-4">Registro de Invitados Corporativos</p>
       </div>
 
       <div className="max-w-4xl mx-auto px-4">
@@ -234,7 +234,7 @@ const idReservaUrl = reservaId;
             <motion.div key="step1" initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
               
               {/* CAJA PARA AGREGAR INVITADO */}
-              <div className="bg-white p-8 rounded-2xl border-2 border-[#d4c5b9] shadow-lg">
+              <div className="bg-white p-6 rounded-xl border-2 border-[#d4c5b9] shadow-lg">
                 <h3 className="font-bold text-[#4a3728] mb-4 uppercase text-sm tracking-wider">Agregar nuevo invitado:</h3>
                 <div className="flex flex-col md:flex-row gap-3">
                   <input 
@@ -245,7 +245,7 @@ const idReservaUrl = reservaId;
                   />
                   <button 
                     onClick={agregarInvitado} 
-                    className="bg-[#1e3a5f] text-white px-10 py-4 rounded-xl font-black uppercase tracking-widest hover:bg-[#162d4a] transition-all shadow-xl active:scale-95"
+                    className="bg-[#1e3a5f] text-white px-6 py-4 rounded-xl font-black uppercase tracking-widest hover:bg-[#162d4a] transition-all shadow-xl active:scale-95"
                   >
                     AGREGAR
                   </button>
@@ -280,7 +280,7 @@ const idReservaUrl = reservaId;
               {invitados.length > 0 && (
                 <button 
                   onClick={() => setProcesoActivo('menu')}
-                  className="w-full py-5 bg-[#c4a484] text-white font-black uppercase tracking-[0.2em] rounded-2xl shadow-2xl hover:bg-[#b39373] transition-all mt-8 border-b-4 border-[#a38363]"
+                  className="py-3 bg-[#c4a484] text-white font-black uppercase tracking-wide rounded-xl shadow-2xl hover:bg-[#b39373] transition-all mt-8 border-b-4 border-[#a38363]"
                 >
                   Siguiente: Seleccionar Menú →
                 </button>

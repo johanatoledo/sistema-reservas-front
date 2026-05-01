@@ -73,7 +73,7 @@ const ReservasTable = () => {
       };
     }
     return {
-      label: 'PENDIENTE',
+      label: 'SIN ADELANTO',
       color: 'bg-amber-100 text-amber-700 border-amber-300',
       icon: '⏱'
     };
@@ -339,7 +339,7 @@ const ReservasTable = () => {
                           </p>
                         ) : (
                           <p className="text-sm text-amber-600 italic px-3 py-2 bg-amber-50 rounded border border-amber-300">
-                            No confirmado
+                           Sin adelanto
                           </p>
                         )}
                       </div>
@@ -377,7 +377,7 @@ const ReservasTable = () => {
 
                     <button
                       onClick={() => cargarInvitadosCorporativos(res.id)}
-                      className="inline-flex items-center gap-2 px-4 py-2 bg-limenita-zafiro/10 hover:bg-limenita-zafiro/20 text-limenita-zafiro font-bold rounded border border-limenita-zafiro/30 transition-colors"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-limenita-zafiro/10 text-limenita-zafiro hover:bg-limenita-zafiro hover:text-white font-bold rounded-lg border border-limenita-zafiro/30 transition-all duration-200 shadow-sm hover:shadow-md active:scale-95"
                     >
                       <Eye className="w-4 h-4" />
                       Ver Invitados y Menú
