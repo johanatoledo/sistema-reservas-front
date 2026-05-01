@@ -282,7 +282,7 @@ const idReservaUrl = reservaId;
                   onClick={() => setProcesoActivo('menu')}
                   className="py-6 bg-[#c4a484] text-white font-black uppercase tracking-wide rounded-xl shadow-2xl hover:bg-[#b39373] transition-all mt-8 border-b-4 border-[#a38363]"
                 >
-                  Siguiente: Seleccionar Menú →
+                   Seleccionar Menú →
                 </button>
               )}
             </motion.div>
