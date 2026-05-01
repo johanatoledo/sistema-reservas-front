@@ -377,7 +377,7 @@ const ReservasTable = () => {
 
                     <button
                       onClick={() => cargarInvitadosCorporativos(res.id)}
-                      className="inline-flex items-center gap-2 px-4 py-2  hover:bg-orange-500 text-white font-bold rounded-lg border border-limenita-zafiro/30 transition-all duration-200 shadow-sm hover:shadow-md active:scale-95"
+                      className="inline-flex items-center gap-2 px-4 py-2 bg-limenita-zafiro/10 text-limenita-zafiro hover:text-limenita-crema font-bold rounded-lg border border-limenita-zafiro/30 transition-all duration-200 shadow-sm shadow-md active:scale-95"
                     >
                       <Eye className="w-4 h-4" />
                       Ver Invitados y Menú
