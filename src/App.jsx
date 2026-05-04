@@ -7,7 +7,7 @@ import Description from './components/Description';
 import Events from './components/Events';
 import Footer from './components/Footer';
 
-import agentelime from './assets/agentelime.jpeg';
+import agentelime from './assets-optimized/agentelime.avif';
 
 // Lazy loading
 const Menu = lazy(() => import('./components/Menu'));

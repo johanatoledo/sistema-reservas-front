@@ -302,7 +302,7 @@ export default function LimenitaAgent({ isOpen, onClose, avatarSrc }) {
             <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3 bg-[#F3E5DC]"
               style={{
                 backgroundImage:
-                  'linear-gradient(to bottom, rgba(243,229,220,0.95), rgba(243,229,220,0.95)), url(/src/assets/texture/damasco-limeñita.jpeg)',
+                  'linear-gradient(to bottom, rgba(243,229,220,0.95), rgba(243,229,220,0.95)), url(/src/assets-optimized/texture/damasco-limeñita.webp)',
                 backgroundRepeat: 'repeat',
               }}
             >

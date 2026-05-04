@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import bannerImg from '../assets/entrada1.jpg';
+import bannerImg from '../assets-optimized/entrada1.avif';
 
 const HeroSection = () => {
   return (
@@ -9,7 +9,7 @@ const HeroSection = () => {
       <div className="absolute inset-0 z-0">
         <img 
           src={bannerImg} 
-          alt="Casona Restaurante Limeñita" 
+          alt="Restaurante de comida criolla" 
           className="w-full h-full object-cover brightness-40"
         />
       </div>
@@ -17,7 +17,6 @@ const HeroSection = () => {
       {/* Overlay de textura damasco (con el color #8C7B5D que editamos) */}
       <div 
         className="absolute inset-0 z-10 opacity-20 pointer-events-none"
-        style={{ backgroundImage: 'var(--image-damasco-pattern)', backgroundRepeat: 'repeat' }}
       ></div>
 
       {/* Gradiente sutil inferior para asegurar legibilidad si la foto es clara abajo */}

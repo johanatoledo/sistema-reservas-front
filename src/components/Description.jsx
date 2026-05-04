@@ -1,12 +1,8 @@
 import React from 'react';
-import entrada from '../assets/entrada.jpg';
+import entrada from '../assets-optimized/entrada1.avif';
 
-/**
- * Componente Description:
- * Muestra el texto de la casona a la izquierda y la imagen del show a la derecha.
- */
 
-const Description = ({ imageSrc = entrada, imageAlt = 'Show de Danza Limeñita' }) => {
+const Description = ({ imageSrc = entrada, imageAlt = 'Restaurante de comida criolla limeña' }) => {
   return (
     <section className="w-full bg-limenita-crema/5 flex flex-col md:flex-row items-center justify-center py-20 px-6 md:px-12 gap-12 border-y border-limenita-oro/10">
       {/* Columna de Texto: Se lee primero en móvil y escritorio */}

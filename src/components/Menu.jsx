@@ -1,59 +1,100 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-// IMAGES
-import causaImg from '../assets/plates-drinks/causa.png';
-import cevicheImg from '../assets/plates-drinks/ceviche.png';
-import lomosaltadoImg from '../assets/plates-drinks/lomosaltado.png';
-import postrelimenoImg from '../assets/plates-drinks/postrelimeño.png';
-import bebidasnaturalesImg from '../assets/plates-drinks/bebidasnaturales.png';
-import coctelesImg from '../assets/plates-drinks/cocteles.png';
-import tonicImg from '../assets/plates-drinks/tonic.png';
-import chilcanoImg from '../assets/plates-drinks/chilcano.png';
-import coctelImg from '../assets/plates-drinks/coctel.png';
+
+
+// AVIF
+import causaAvif from '../assets-optimized/plates-drinks/causa.avif';
+import cevicheAvif from '../assets-optimized/plates-drinks/ceviche.avif';
+import lomosaltadoAvif from '../assets-optimized/plates-drinks/lomosaltado.avif';
+import postrelimenoAvif from '../assets-optimized/plates-drinks/postres-limeña.avif';
+import picaronesAvif from '../assets-optimized/plates-drinks/picarones-limeños.avif';
+import pulpOlivoAvif from '../assets-optimized/plates-drinks/pulpo-al-olivo.avif';
+import spaguettiLomoSaltadoAvif from '../assets-optimized/plates-drinks/spaguetti-lomosaltado.avif';
+import bebidasnaturalesAvif from '../assets-optimized/plates-drinks/bebidasnaturales.avif';
+import coctelesAvif from '../assets-optimized/plates-drinks/cocteles.avif';
+import tonicAvif from '../assets-optimized/plates-drinks/tonic.avif';
+import chilcanoAvif from '../assets-optimized/plates-drinks/chilcano.avif';
+import coctelAvif from '../assets-optimized/plates-drinks/coctel.avif';
+import piscosourAvif from '../assets-optimized/plates-drinks/pisco-sour.avif';
+
+
+// WEBP
+import causaWebp from '../assets-optimized/plates-drinks/causa.webp';
+import cevicheWebp from '../assets-optimized/plates-drinks/ceviche.webp';
+import lomosaltadoWebp from '../assets-optimized/plates-drinks/lomosaltado.webp';
+import postrelimenoWebp from '../assets-optimized/plates-drinks/postres-limeña.webp';
+import picaronesWepb from '../assets-optimized/plates-drinks/picarones-limeños.webp';
+import pulpOlivoWepb from '../assets-optimized/plates-drinks/pulpo-al-olivo.webp';
+import spaguettiLomoSaltadoWepb from '../assets-optimized/plates-drinks/spaguetti-lomosaltado.webp';
+import bebidasnaturalesWebp from '../assets-optimized/plates-drinks/bebidasnaturales.webp';
+import coctelesWebp from '../assets-optimized/plates-drinks/cocteles.webp';
+import tonicWebp from '../assets-optimized/plates-drinks/tonic.webp';
+import chilcanoWebp from '../assets-optimized/plates-drinks/chilcano.webp';
+import coctelWebp from '../assets-optimized/plates-drinks/coctel.webp';
+import piscosourWepb from '../assets-optimized/plates-drinks/pisco-sour.webp';
+
+
+
+const IMAGES = {
+  causa: { avif: causaAvif, webp: causaWebp },
+  ceviche: { avif: cevicheAvif, webp: cevicheWebp },
+  lomosaltado: { avif: lomosaltadoAvif, webp: lomosaltadoWebp },
+  postrelimeno: { avif: postrelimenoAvif, webp: postrelimenoWebp },
+  picarones: { avif: picaronesAvif, webp: picaronesWepb },
+  pulpOlivo: { avif: pulpOlivoAvif, webp: pulpOlivoWepb },
+  spaguettiLomoSaltado: { avif: spaguettiLomoSaltadoAvif, webp: spaguettiLomoSaltadoWepb },
+  piscosour: { avif: piscosourAvif, webp: piscosourWepb },
+  bebidasnaturales: { avif: bebidasnaturalesAvif, webp: bebidasnaturalesWebp },
+  cocteles: { avif: coctelesAvif, webp: coctelesWebp },
+  tonic: { avif: tonicAvif, webp: tonicWebp },
+  chilcano: { avif: chilcanoAvif, webp: chilcanoWebp },
+  coctel: { avif: coctelAvif, webp: coctelWebp },
+};
+
 
 
 const menuData = {
   'Sabores que dan La Bienvenida': [
-    { name: 'OCOPA LIMEÑA', description: 'Papa Amarilla con nuestra clasica salsa huacatay,queso fresco,huevo y aceituna, con toques dulces', price: 20, photo: causaImg },
-    { name: 'PAPA A LA HUANCAINA', description: 'Clásica y sabrosa, preparada con ají amarillo cremoso y queso fresco. Porción generosa para compartir', price: 20, photo: causaImg },
-    { name: 'CAUSA LIMEÑA', description: 'Suave masa de papa amarilla mangueada, rellena con pollo en mayonesa casera. Acompañada con palta,aceituna,huevito de codorniz, hilos de camote crocante', price: 25, photo: causaImg },
-    { name: 'ENCUENTRO ANDINO', description: 'Papas bañadas en salsa huancaína y ocopa', price: 23, photo: causaImg },
-    { name: 'PAPA RELLENA', description: 'De carne picada,aceituna y huevo: empanizada al panko. Servida sobre un espejo de huancaína y ocopa, y una ensalada criolla', price: 25, photo: causaImg },
-    { name: 'CHORITOS A LA CHALACA', description: 'Choritos frescos con cebolla, tomate, choclo y limón, bañados en su toque picante. Refrescantes y llenos de sabor marino.', price: 30, photo: causaImg }, 
-    { name: 'CONCHAS AL FUEGO', description: 'Conchas frescas gratinadas con mantequilla, ajo y queso paria derretido. Un bocado intenso que une mar y sierra', price: 35, photo: causaImg },
-    { name: 'PULPO AL OLIVO', description: 'Pulpo tierno con crema de aceitunas negras y un toque acevichado. Acompañado de galletas de soda y palta para equilibrar sabores.', price: 45, photo: causaImg },
+    { name: 'OCOPA LIMEÑA', description: 'Papa Amarilla con nuestra clasica salsa huacatay,queso fresco,huevo y aceituna, con toques dulces', price: 20, photo: IMAGES.causa },
+    { name: 'PAPA A LA HUANCAINA', description: 'Clásica y sabrosa, preparada con ají amarillo cremoso y queso fresco. Porción generosa para compartir', price: 20, photo: IMAGES.causa },
+    { name: 'CAUSA LIMEÑA', description: 'Suave masa de papa amarilla mangueada, rellena con pollo en mayonesa casera. Acompañada con palta,aceituna,huevito de codorniz, hilos de camote crocante', price: 25, photo: IMAGES.causa },
+    { name: 'ENCUENTRO ANDINO', description: 'Papas bañadas en salsa huancaína y ocopa', price: 23, photo: IMAGES.causa },
+    { name: 'PAPA RELLENA', description: 'De carne picada,aceituna y huevo: empanizada al panko. Servida sobre un espejo de huancaína y ocopa, y una ensalada criolla', price: 25, photo: IMAGES.causa },
+    { name: 'CHORITOS A LA CHALACA', description: 'Choritos frescos con cebolla, tomate, choclo y limón, bañados en su toque picante. Refrescantes y llenos de sabor marino.', price: 30, photo: IMAGES.causa }, 
+    { name: 'CONCHAS AL FUEGO', description: 'Conchas frescas gratinadas con mantequilla, ajo y queso paria derretido. Un bocado intenso que une mar y sierra', price: 35, photo: IMAGES.causa },
+    { name: 'PULPO AL OLIVO', description: 'Pulpo tierno con crema de aceitunas negras y un toque acevichado. Acompañado de galletas de soda y palta para equilibrar sabores.', price: 45, photo: IMAGES.pulpOlivo },
 ],
   'Herencia Marina': [
-    { name: 'LECHE DE TIGRE', description: 'Jugo de ceviche a base ded ají amarillo y pasta de rocoto, acompañado de chicharron de pota.', price: 25, photo: cevicheImg },
-    { name: 'CEVICHE DE PESCADO', description: 'Pescado del día marinado al limón y ají limo, acompañado de cebolla en juliana, choclo y camote dulce.', price: 45, photo: cevicheImg },
-    { name: 'CHICHARRON DE PESCADO', description: 'Trozo de pescado crocantes al panko, acompañado de yuca frita, sarsa criolla y tártara.', price: 40, photo: cevicheImg },
-    { name: 'SPAGUETTI MAR Y TIERRA', description: 'Spaguetti con mariscos y champiñones en salsa cremosa, gratinados con parmesano.', price: 40, photo: cevicheImg },
-    { name: 'CAUSA DE PESCADO CON LANGOSTINOS CROCANTES', description: 'Causa limeña de papa mangueada, acompañada de pescado con mayonesa, coronada con langostinos crocantes y chips de papas nativas, bañada en leche de tigre de rocoto y ají amarillo.', price: 40, photo: cevicheImg },  
-    { name: 'CEVICHE CONCHAS NEGRAS', description: 'Conchas negras frescas marinadas en limón con cebolla, ají limo y culantro. Sabor intenso y salino, con un toque norteño y chicharrón de pota', price: 50, photo: cevicheImg },
-    { name: 'CHAUFA DE MARISCOS', description: 'Mixtura de mariscos salteados al wok', price: 37, photo: cevicheImg },
-    { name: 'ARROZ CON MARISCOS', description: 'Arroz cremoso, salteado con mezcla de mariscos en una deliciosa salsa criolla', price: 40, photo: cevicheImg },
-    { name: 'DUO MARINO 1', description: 'Ceviche clásico + arroz con mariscos', price: 45, photo: cevicheImg },
-    { name: 'DUO MARINO 2', description: ' Ceviche clásico + chaufa de mariscos', price: 45, photo: cevicheImg },
-    { name: 'DUO MARINO 3', description: ' Ceviche clásico + chicharrón de pescado', price: 50, photo: cevicheImg },
+    { name: 'LECHE DE TIGRE', description: 'Jugo de ceviche a base ded ají amarillo y pasta de rocoto, acompañado de chicharron de pota.', price: 25, photo: IMAGES.ceviche },
+    { name: 'CEVICHE DE PESCADO', description: 'Pescado del día marinado al limón y ají limo, acompañado de cebolla en juliana, choclo y camote dulce.', price: 45, photo: IMAGES.ceviche },
+    { name: 'CHICHARRON DE PESCADO', description: 'Trozo de pescado crocantes al panko, acompañado de yuca frita, sarsa criolla y tártara.', price: 40, photo: IMAGES.ceviche },
+    { name: 'SPAGUETTI MAR Y TIERRA', description: 'Spaguetti con mariscos y champiñones en salsa cremosa, gratinados con parmesano.', price: 40, photo: IMAGES.ceviche },
+    { name: 'CAUSA DE PESCADO CON LANGOSTINOS CROCANTES', description: 'Causa limeña de papa mangueada, acompañada de pescado con mayonesa, coronada con langostinos crocantes y chips de papas nativas, bañada en leche de tigre de rocoto y ají amarillo.', price: 40, photo: IMAGES.ceviche },  
+    { name: 'CEVICHE CONCHAS NEGRAS', description: 'Conchas negras frescas marinadas en limón con cebolla, ají limo y culantro. Sabor intenso y salino, con un toque norteño y chicharrón de pota', price: 50, photo: IMAGES.ceviche },
+    { name: 'CHAUFA DE MARISCOS', description: 'Mixtura de mariscos salteados al wok', price: 37, photo: IMAGES.ceviche },
+    { name: 'ARROZ CON MARISCOS', description: 'Arroz cremoso, salteado con mezcla de mariscos en una deliciosa salsa criolla', price: 40, photo: IMAGES.ceviche },
+    { name: 'DUO MARINO 1', description: 'Ceviche clásico + arroz con mariscos', price: 45, photo: IMAGES.ceviche },
+    { name: 'DUO MARINO 2', description: ' Ceviche clásico + chaufa de mariscos', price: 45, photo: IMAGES.ceviche },
+    { name: 'DUO MARINO 3', description: ' Ceviche clásico + chicharrón de pescado', price: 50, photo: IMAGES.ceviche},
   ],
   'La mesa de Limenita': [
-    { name: 'SPAGHETTI A LA HUANCAINA CON LOMO SALTADO', description: 'Lomo fino, servido sobre unos cremosos spaghetti a la huancaína.', price: 55, photo: lomosaltadoImg },
-    { name: 'CHAUFA CON PANCETA EN SALSA ORIENTAL', description: 'Chaufa con panceta crujiente en salsa oriental dulce, con el toque del wok que realza su sabor', price: 35, photo: lomosaltadoImg },
-    { name: 'SECO NORTEÑO', description: 'Asado de tira de res acompañado con cremosos frejoles y arroz', price: 55, photo: lomosaltadoImg },
-    { name: 'MILANESA LIMEÑITA A LO POBRE', description: 'Milanesa de lomo fino con arroz, papas nativas fritas, plátano y huevo frito', price: 50, photo: lomosaltadoImg },
-    { name: 'CHAUFA AMAZÓNICO', description: 'Cecina, chorizo amazónico y plátano frito salteados al wok, acompañado con ají de cocona y huevito a la inglesa', price: 38, photo: lomosaltadoImg },
-    { name: 'AJI DE POLLO', description: 'En un punto. Bien cremoso, acompañado con papas, huevo, aceituna y arroz', price: 35, photo: lomosaltadoImg },
-    { name: 'POLLO CRIOLLO AL ESTILO LIMEÑITA', description: 'Servido con papas nativas, choclito y ensalada mixta de col, acompañado con una salsa de ocopa', price: 35, photo: lomosaltadoImg },
-    { name: 'ARROZ CON PATO', description: 'Preparado al estilo del norte, con culantro fresco, ají amarillo y loche. Servido con pato jugoso y su infaltable chalaquita criolla', price: 60, photo: lomosaltadoImg },
-    { name: 'LOMO SALTADO CLÁSICO', description: 'Lomo fino salteado con verduras, acompañado de papas nativas fritas y arroz', price: 50, photo: lomosaltadoImg },
+    { name: 'SPAGHETTI A LA HUANCAINA CON LOMO SALTADO', description: 'Lomo fino, servido sobre unos cremosos spaghetti a la huancaína.', price: 55, photo: IMAGES.spaguettiLomoSaltado },
+    { name: 'CHAUFA CON PANCETA EN SALSA ORIENTAL', description: 'Chaufa con panceta crujiente en salsa oriental dulce, con el toque del wok que realza su sabor', price: 35, photo: IMAGES.lomosaltado },
+    { name: 'SECO NORTEÑO', description: 'Asado de tira de res acompañado con cremosos frejoles y arroz', price: 55, photo: IMAGES.lomosaltado },
+    { name: 'MILANESA LIMEÑITA A LO POBRE', description: 'Milanesa de lomo fino con arroz, papas nativas fritas, plátano y huevo frito', price: 50, photo: IMAGES.lomosaltado },
+    { name: 'CHAUFA AMAZÓNICO', description: 'Cecina, chorizo amazónico y plátano frito salteados al wok, acompañado con ají de cocona y huevito a la inglesa', price: 38, photo: IMAGES.lomosaltado },
+    { name: 'AJI DE POLLO', description: 'En un punto. Bien cremoso, acompañado con papas, huevo, aceituna y arroz', price: 35, photo: IMAGES.lomosaltado },
+    { name: 'POLLO CRIOLLO AL ESTILO LIMEÑITA', description: 'Servido con papas nativas, choclito y ensalada mixta de col, acompañado con una salsa de ocopa', price: 35, photo: IMAGES.lomosaltado },
+    { name: 'ARROZ CON PATO', description: 'Preparado al estilo del norte, con culantro fresco, ají amarillo y loche. Servido con pato jugoso y su infaltable chalaquita criolla', price: 60, photo: IMAGES.lomosaltado },
+    { name: 'LOMO SALTADO CLÁSICO', description: 'Lomo fino salteado con verduras, acompañado de papas nativas fritas y arroz', price: 50, photo: IMAGES.lomosaltado },
   ],
   'El Broche de Oro': [ 
-    { name: 'PICARONES', description: 'Tradicionales y bañados en miel chancaca.', price: 19, photo: postrelimenoImg },
-    { name: 'HELADO DE TEMPORADA', description: 'Artesanal y refrescante, acompañado de trozos de brownie.', price: 20, photo: postrelimenoImg },
-    { name: 'TARTA DE QUESO', description: 'Suave y cremosa, elaborada con mezcla de quesos peruanos sobre base crocante de galleta.', price: 25, photo: postrelimenoImg },
-    { name: 'CORAZÓN LIMEÑITA', description: 'Corazón de chocolate relleno con suspiro de chirimoya.', price: 28, photo: postrelimenoImg },
-    { name: 'CHURROS CON HELADO', description: 'Crujientes churros recien hechos, espolvoreados con azúcar y canela, servidos con una bola  de helado de tiramisú.', price: 20, photo: postrelimenoImg },
+    { name: 'PICARONES', description: 'Tradicionales y bañados en miel chancaca.', price: 19, photo: IMAGES.picarones },
+    { name: 'HELADO DE TEMPORADA', description: 'Artesanal y refrescante, acompañado de trozos de brownie.', price: 20, photo: IMAGES.postrelimeno },
+    { name: 'TARTA DE QUESO', description: 'Suave y cremosa, elaborada con mezcla de quesos peruanos sobre base crocante de galleta.', price: 25, photo: IMAGES.postrelimeno },
+    { name: 'CORAZÓN LIMEÑITA', description: 'Corazón de chocolate relleno con suspiro de chirimoya.', price: 28, photo: IMAGES.postrelimeno},
+    { name: 'CHURROS CON HELADO', description: 'Crujientes churros recien hechos, espolvoreados con azúcar y canela, servidos con una bola  de helado de tiramisú.', price: 20, photo: IMAGES.postrelimeno },
   ],
   'Guarniciones': [
     { name: 'GUARNICION 1', description: 'Arroz blanco con choclito', price: 8 },
@@ -62,18 +103,18 @@ const menuData = {
     { name: 'GUARNICION 4', description: 'Salsa Huancaína.', price: 5 },
   ],
   'Bebidas': [
-    { name: 'LIMONADA', description: 'Natural', price: 8, photo: bebidasnaturalesImg },
-    { name: 'LIMONADA ', description: 'Fronzen', price: 12, photo: bebidasnaturalesImg },
-    { name: 'MARACUYA', description: 'Natural', price: 8, photo: bebidasnaturalesImg },
-    { name: 'MARACUYA', description: 'Fronzen', price: 12, photo: bebidasnaturalesImg },
-    { name: 'CHICHA MORADA', description: 'Natural', price: 10, photo: bebidasnaturalesImg },
-    { name: 'CHICHA MORADA', description: 'Fronzen', price: 15, photo: bebidasnaturalesImg },
-    { name: 'AGUA MUNAY', description: 'Con o sin gas 300 ml', price: 8, photo: bebidasnaturalesImg },
-    { name: 'AGUA MUNAY', description: 'Con o sin gas 500 ml', price: 10, photo: bebidasnaturalesImg },
-    { name: 'GASEOSA COCA COLA', description: 'Helada o sin helar', price: 8, photo: bebidasnaturalesImg },
-    { name: 'GASEOSA INCAKOLA', description: 'Helada o sin helar', price: 8, photo: bebidasnaturalesImg },
-    { name: 'LIMONADA AFRUTADA', description: 'Natural con tres sabores a elegir:Fresa-Menta-Hierba Luisa', price: 10, photo: bebidasnaturalesImg },
-    { name: 'LIMONADA AFRUTADA', description: 'Fronzen con tres sabores a elegir:Fresa-Menta-Hierba Luisa', price: 10, photo: bebidasnaturalesImg },
+    { name: 'LIMONADA', description: 'Natural', price: 8, photo: IMAGES.bebidasnaturales },
+    { name: 'LIMONADA ', description: 'Fronzen', price: 12, photo:  IMAGES.bebidasnaturales },
+    { name: 'MARACUYA', description: 'Natural', price: 8, photo:  IMAGES.bebidasnaturales },
+    { name: 'MARACUYA', description: 'Fronzen', price: 12, photo:  IMAGES.bebidasnaturales },
+    { name: 'CHICHA MORADA', description: 'Natural', price: 10, photo:  IMAGES.bebidasnaturales },
+    { name: 'CHICHA MORADA', description: 'Fronzen', price: 15, photo:  IMAGES.bebidasnaturales },
+    { name: 'AGUA MUNAY', description: 'Con o sin gas 300 ml', price: 8, photo:  IMAGES.bebidasnaturales },
+    { name: 'AGUA MUNAY', description: 'Con o sin gas 500 ml', price: 10, photo:  IMAGES.bebidasnaturales },
+    { name: 'GASEOSA COCA COLA', description: 'Helada o sin helar', price: 8, photo:  IMAGES.bebidasnaturales },
+    { name: 'GASEOSA INCAKOLA', description: 'Helada o sin helar', price: 8, photo:  IMAGES.bebidasnaturales },
+    { name: 'LIMONADA AFRUTADA', description: 'Natural con tres sabores a elegir:Fresa-Menta-Hierba Luisa', price: 10, photo:  IMAGES.bebidasnaturales },
+    { name: 'LIMONADA AFRUTADA', description: 'Fronzen con tres sabores a elegir:Fresa-Menta-Hierba Luisa', price: 10, photo:  IMAGES.bebidasnaturales },
     
   ],
   'Infusiones': [
@@ -81,48 +122,48 @@ const menuData = {
     { name: 'INFUSIONES LA FIDELIA', description: 'Diferentes sabores', price: 10 },
   ],
   'Cocteles Limeños': [
-    { name: 'SMOKED SOUR', description: 'Pisco Pago de los Frailes by Portón macerado en canela, agave de los Andes, licor de cacao, lima limón, piña grillada y clara', price: 39, photo: coctelesImg },
-    { name: 'CHILCANO LIMEÑO', description: 'Pisco Pago de los Frailes by Portón, estrujado en cáscaras de lima, aguaymanto y ginger ale', price: 29, photo: tonicImg },
-    { name: 'PISCO PUNCH SPICED', description: 'Pisco Pago de los Frailes by Portón, especias, piña y albahaca.', price: 33, photo: chilcanoImg },
-    { name: 'TROPICAL TEA PUNCH', description: 'Pisco Pago de los Frailes by Portón, té frío, maracumango', price: 39, photo: coctelImg },
-    { name: 'NEGRONI DARK', description: 'Ron Bacardi añejo, Campari, Cinzano 1757 y Pedro Ximénez oloroso.', price: 39, photo: bebidasnaturalesImg },
-    { name: 'MARGARITA MILAGROSA', description: 'Tequila Espolón, kiwi, leche de coco, triple sec y blueberries', price: 39, photo: tonicImg },
+    { name: 'SMOKED SOUR', description: 'Pisco Pago de los Frailes by Portón macerado en canela, agave de los Andes, licor de cacao, lima limón, piña grillada y clara', price: 39, photo: IMAGES.cocteles },
+    { name: 'CHILCANO LIMEÑO', description: 'Pisco Pago de los Frailes by Portón, estrujado en cáscaras de lima, aguaymanto y ginger ale', price: 29, photo: IMAGES.tonic },
+    { name: 'PISCO PUNCH SPICED', description: 'Pisco Pago de los Frailes by Portón, especias, piña y albahaca.', price: 33, photo: IMAGES.chilcano },
+    { name: 'TROPICAL TEA PUNCH', description: 'Pisco Pago de los Frailes by Portón, té frío, maracumango', price: 39, photo: IMAGES.tonic },
+    { name: 'NEGRONI DARK', description: 'Ron Bacardi añejo, Campari, Cinzano 1757 y Pedro Ximénez oloroso.', price: 39, photo: IMAGES.cocteles },
+    { name: 'MARGARITA MILAGROSA', description: 'Tequila Espolón, kiwi, leche de coco, triple sec y blueberries', price: 39, photo: IMAGES.chilcano },
   ],
   'Cocteles Clasicos': [
-    { name: 'APEROL SPRITZ', description: 'Aperol, Cinzano prosecco y soda.', price: 29, photo: bebidasnaturalesImg },
-    { name: 'SERVULO', description: 'Aperol, Pisco Portón aromático, licor de cherry y Cinzano Blanco.', price: 29, photo: coctelesImg },
-    { name: 'CAPITAN', description: '', price: 29, photo: chilcanoImg },
-    { name: 'ALGARROBINA', description: '', price: 25, photo: bebidasnaturalesImg },
-    { name: 'PISCO SOUR', description: '', price: 28, photo: coctelImg },
-    { name: 'CHILCANO CLASICO', description: '', price: 22, photo: chilcanoImg },
-    { name: 'CHILCANO DE MARACUYA', description: '', price: 25, photo: coctelesImg },
-    { name: 'CUBA LIBRE', description: '', price: 24, photo: bebidasnaturalesImg },
-    { name: 'PIÑA COLADA', description: '', price: 29, photo: chilcanoImg },
+    { name: 'APEROL SPRITZ', description: 'Aperol, Cinzano prosecco y soda.', price: 29, photo: IMAGES.cocteles },
+    { name: 'SERVULO', description: 'Aperol, Pisco Portón aromático, licor de cherry y Cinzano Blanco.', price: 29, photo: IMAGES.tonic },
+    { name: 'CAPITAN', description: '', price: 29, photo: IMAGES.chilcano },
+    { name: 'ALGARROBINA', description: '', price: 25, photo: IMAGES.coctel},
+    { name: 'PISCO SOUR', description: '', price: 28, photo: IMAGES.piscosour },
+    { name: 'CHILCANO CLASICO', description: '', price: 22, photo: IMAGES.bebidasnaturales },
+    { name: 'CHILCANO DE MARACUYA', description: '', price: 25, photo: IMAGES.chilcano},
+    { name: 'CUBA LIBRE', description: '', price: 24, photo: IMAGES.cocteles },
+    { name: 'PIÑA COLADA', description: '', price: 29, photo: IMAGES.tonic },
       
   ],
   'Mocktails (sin alcohol)': [
-    { name: 'ROJO PASION', description: 'Arándanos, camu camu, lima limón, agua tónica y clara de huevo.', price: 25, photo: chilcanoImg },
-    { name: 'ROJO PASION CON GIN', description: 'Arándanos, camu camu, lima limón, agua tónica,clara de huevo Y gin macerado en airampo y té. ', price: 35, photo: coctelesImg },
-    { name: 'DELICIOSA VIRGEN', description: 'Kiwi, elderflower, lima limón y tónica blossom.', price: 25, photo: tonicImg },
+    { name: 'ROJO PASION', description: 'Arándanos, camu camu, lima limón, agua tónica y clara de huevo.', price: 25, photo: IMAGES.chilcano },
+    { name: 'ROJO PASION CON GIN', description: 'Arándanos, camu camu, lima limón, agua tónica,clara de huevo Y gin macerado en airampo y té. ', price: 35, photo: IMAGES.bebidasnaturales },
+    { name: 'DELICIOSA VIRGEN', description: 'Kiwi, elderflower, lima limón y tónica blossom.', price: 25, photo: IMAGES.tonic },
   ],
   'Calientitos': [
-    { name: 'TE PITEADO PALAIS', description: 'Whisky Johnnie Walker Red Label, piña grillada, frutos rojos y concentrado de de té de rosas y jazmín.', price: 38, photo: chilcanoImg },
+    { name: 'TE PITEADO PALAIS', description: 'Whisky Johnnie Walker Red Label, piña grillada, frutos rojos y concentrado de de té de rosas y jazmín.', price: 38, photo: IMAGES.coctel },
 
   ],
   'Gins & Tonics (Perfect serve)': [
-    { name: 'BOMBAY SAPPHIRE TONIC', description: 'Servido con una Tónica dry perfume de naranja y limón', price: 29, photo: coctelesImg },
-    { name: 'BOMBAY BRAMBLE TONIC', description: 'Servido con una Tónica dry, arándanos y fresas.', price: 30, photo: coctelImg },
-    { name: 'HENDRICKS TONIC', description: 'Servido con una Tónica dry y pepino kiuri.', price: 39, photo: chilcanoImg },
-    { name: 'TANQUERAY LONDON DRY TONIC', description: 'Servido con una Tónica dry y rodaja de limón', price: 26, photo: tonicImg },
-    { name: 'AIRAMPO TEA TONIC', description: 'Gin macerado con airampo y té de frutos rojos, servido con una tónica blossom y frutos del bosque.', price: 29, photo: bebidasnaturalesImg },
+    { name: 'BOMBAY SAPPHIRE TONIC', description: 'Servido con una Tónica dry perfume de naranja y limón', price: 29, photo: IMAGES.coctel },
+    { name: 'BOMBAY BRAMBLE TONIC', description: 'Servido con una Tónica dry, arándanos y fresas.', price: 30, photo: IMAGES.chilcano },
+    { name: 'HENDRICKS TONIC', description: 'Servido con una Tónica dry y pepino kiuri.', price: 39, photo: IMAGES.tonic },
+    { name: 'TANQUERAY LONDON DRY TONIC', description: 'Servido con una Tónica dry y rodaja de limón', price: 26, photo: IMAGES.bebidasnaturales },
+    { name: 'AIRAMPO TEA TONIC', description: 'Gin macerado con airampo y té de frutos rojos, servido con una tónica blossom y frutos del bosque.', price: 29, photo: IMAGES.cocteles },
   ],
 };
 
 const Menu = () => {
+
   // Get categories for buttons
   const categories = Object.keys(menuData);
   const [activeCategory, setActiveCategory] = useState(categories[0]);
-
   // Framer Motion variants para animaciones suaves al cambiar de categoría
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -146,7 +187,6 @@ const Menu = () => {
       {/* Use a pseudo-element for the background with low opacity to avoid saturation */}
       <div 
         className="absolute inset-0 z-0 bg-repeat opacity-15"
-        style={{ backgroundImage: `url('/assets/textures/damasco-azul-plata.jpg')` }}
       ></div>
       
       {/* Color overlay to ensure readability */}
@@ -205,12 +245,18 @@ const Menu = () => {
                   {/* DISH PHOTO (Optional) */}
                   {dish.photo ? (
                     <div className="w-1/3 md:w-48 h-auto min-h-[120px] overflow-hidden relative flex-shrink-0">
-                      <img 
-                        src={dish.photo} 
-                        alt={dish.name} 
-                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                        onError={(e) => { e.target.style.display = 'none'; }} 
-                      />
+                      <picture>
+                        <source srcSet={dish.photo.avif} type="image/avif" />
+                        <source srcSet={dish.photo.webp} type="image/webp" /> 
+                        <img 
+                          src={dish.photo.webp}
+                          alt={dish.name} 
+                          loading="lazy"
+                          decoding="async"
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                          onError={(e) => { e.target.style.display = 'none'; }} 
+                        />
+                      </picture>
                       <div className="absolute inset-0 bg-black/10 group-hover:bg-transparent transition-colors"></div>
                     </div>
                   ) : (

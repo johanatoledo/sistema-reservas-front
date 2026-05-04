@@ -54,17 +54,17 @@ const Footer = () => (
           ))}
         </div>
       </div>
-      {/* Créditos y copyright */}
+      {/* Créditos y copyright  poner luego url a la pagina*/}
       <div className="flex flex-col items-center md:items-end gap-2 text-sm">
         <span>
-          Creado por{' '}
+          
           <a
             href="https://toledanadev.com"
             target="_blank"
             rel="noopener noreferrer"
             className="text-limenita-oro hover:underline font-semibold"
           >
-            www.tonatech.com
+            
           </a>
         </span>
         <span>&copy; {new Date().getFullYear()} Limeñita. Todos los derechos reservados.</span>

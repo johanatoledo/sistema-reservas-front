@@ -49,7 +49,7 @@
   .bg-damasco-overlay {
     background-image: 
       linear-gradient(to bottom, rgba(140, 123, 93, 0.85), rgba(140, 123, 93, 0.85)),
-      url('/src/assets/texture/damasco-limeñita.jpeg');
+      url('/src/assets-optimized/texture/damasco-limeñita.webp');
     background-repeat: repeat;
   }
 
