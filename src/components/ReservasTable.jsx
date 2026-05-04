@@ -46,6 +46,10 @@ const ReservasTable = () => {
     return reservas.filter(r => r.tipo_cliente === filter);
   }, [reservas, filter]);
 
+  
+
+
+
   // ═══════════════════════════════════════
   // FUNCIONES AUXILIARES
   // ═══════════════════════════════════════

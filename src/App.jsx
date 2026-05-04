@@ -1,144 +1,166 @@
-import React, { useState, useRef } from 'react';
-import { BrowserRouter, Routes, Route, useNavigate } from 'react-router-dom';
+import React, { useState, useRef, lazy, Suspense, useCallback } from 'react';
+import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
+
 import Navbar from './components/Navbar';
 import HeroSection from './components/HeroSection';
-import Menu from './components/Menu';
 import Description from './components/Description';
 import Events from './components/Events';
 import Footer from './components/Footer';
-import LimenitaAgent from './components/LimenitaAgent';
+
 import agentelime from './assets/agentelime.jpeg';
-import ReservasTable from './components/ReservasTable';
-import FormularioInvitadosCorporativo from './components/FormularioInvitadosCorporativo';
-import AmbientesSlider from './components/AmbientesSlider';
 
+// Lazy loading
+const Menu = lazy(() => import('./components/Menu'));
+const LimenitaAgent = lazy(() => import('./components/LimenitaAgent'));
+const ReservasTable = lazy(() => import('./components/ReservasTable'));
+const FormularioInvitadosCorporativo = lazy(() =>
+  import('./components/FormularioInvitadosCorporativo')
+);
+const AmbientesSlider = lazy(() => import('./components/AmbientesSlider'));
 
+const Loader = () => (
+  <div className="py-10 text-center text-limenita-crema">
+    Cargando...
+  </div>
+);
 
-
-//  LandingPage
-//  activeSection controla qué sección extra está visible.
-//  'inicio' → solo hero + description + events (default)
-//  'carta'  → hero + description + events + Menu
 const LandingPage = ({ inicioRef, cartaRef, activeSection }) => (
   <>
-  {/* Sección INICIO — siempre montada */}
     <section ref={inicioRef}>
       <HeroSection />
       <Description />
       <Events />
-      <AmbientesSlider />
+
+      <Suspense fallback={<Loader />}>
+        <AmbientesSlider />
+      </Suspense>
     </section>
-    
-    {/* Sección CARTA — solo visible cuando activeSection === 'carta' */}
+
     {activeSection === 'carta' && (
       <section ref={cartaRef} className="py-20">
-        <Menu />
+        <Suspense fallback={<Loader />}>
+          <Menu />
+        </Suspense>
       </section>
     )}
   </>
 );
 
-//  AppContent
-
 function AppContent({ setLocale, locale }) {
-   const [isAgentOpen, setIsAgentOpen]     = useState(false);
-  const [activeSection, setActiveSection] = useState('inicio'); // Estado que controla la visibilidad
- 
-  const navigate  = useNavigate();
+  const [isAgentOpen, setIsAgentOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState('inicio');
+
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const inicioRef = useRef(null);
   const cartaRef = useRef(null);
 
   const isFormularioInvitados = location.pathname.startsWith('/formulario-invitados');
-  //Scroll helpers
 
-  const scrollToRef = (ref) => {
-    ref?.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
- 
-  const ejecutarScroll = (id) => {
+  const scrollToRef = useCallback((ref) => {
+    ref?.current?.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+    });
+  }, []);
+
+  const ejecutarScroll = useCallback((id) => {
     if (id === 'inicio') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else if (id === 'carta') {
-      // cartaRef existe solo cuando activeSection === 'carta'
-      // Le damos un tick para que React monte el nodo antes de hacer scroll
-      setTimeout(() => scrollToRef(cartaRef), 50);
+      return;
     }
-  };
 
-  // Navegación principal
- const handleNavClick = (id) => {
+    if (id === 'carta') {
+      requestAnimationFrame(() => {
+        setTimeout(() => scrollToRef(cartaRef), 50);
+      });
+    }
+  }, [scrollToRef]);
+
+  const handleNavClick = useCallback((id) => {
     const cleanId = id.replace('#', '');
- 
-    
+
     if (cleanId === 'asistente') {
       navigate('/asistente');
       return;
     }
- 
-    
-    if (window.location.pathname !== '/') {
+
+    if (location.pathname !== '/') {
       navigate('/');
+
       setTimeout(() => {
         setActiveSection(cleanId);
         ejecutarScroll(cleanId);
       }, 150);
+
       return;
     }
-      
- 
-    // INICIO → ocultar secciones extra + scroll al top
+
     if (cleanId === 'inicio') {
       setActiveSection('inicio');
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
- 
-    // Cualquier otra sección → activarla y hacer scroll
+
     setActiveSection(cleanId);
     ejecutarScroll(cleanId);
-  };
- 
- 
+  }, [navigate, location.pathname, ejecutarScroll]);
 
   return (
     <div className="bg-limenita-taupe min-h-screen text-limenita-crema">
       {!isFormularioInvitados && (
-        <Navbar 
-          setLocale={setLocale} 
-          locale={locale} 
+        <Navbar
+          setLocale={setLocale}
+          locale={locale}
           onReservaClick={() => setIsAgentOpen(true)}
-          onNavClick={handleNavClick} 
+          onNavClick={handleNavClick}
           activeSection={activeSection}
         />
       )}
-      
-      <Routes>
-        <Route path="/" element={<LandingPage inicioRef={inicioRef} cartaRef={cartaRef} activeSection={activeSection} />} />
-         <Route path="/asistente" element={<ReservasTable />} />
-          <Route path="/formulario-invitados/:reservaId" element={<FormularioInvitadosCorporativo />} />
-      </Routes>
-      
-        {!isFormularioInvitados && (
-        <LimenitaAgent
-          isOpen={isAgentOpen}
-          onClose={() => setIsAgentOpen(false)}
-          avatarSrc={agentelime}
-        />
+
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <LandingPage
+                inicioRef={inicioRef}
+                cartaRef={cartaRef}
+                activeSection={activeSection}
+              />
+            }
+          />
+
+          <Route path="/asistente" element={<ReservasTable />} />
+
+          <Route
+            path="/formulario-invitados/:reservaId"
+            element={<FormularioInvitadosCorporativo />}
+          />
+        </Routes>
+      </Suspense>
+
+      {!isFormularioInvitados && isAgentOpen && (
+        <Suspense fallback={null}>
+          <LimenitaAgent
+            isOpen={isAgentOpen}
+            onClose={() => setIsAgentOpen(false)}
+            avatarSrc={agentelime}
+          />
+        </Suspense>
       )}
 
       {!isFormularioInvitados && <Footer />}
-      
     </div>
   );
 }
-//  App — envuelve en BrowserRouter para habilitar useNavigate
+
 function App({ setLocale, locale }) {
   return (
-    
     <BrowserRouter>
       <AppContent setLocale={setLocale} locale={locale} />
     </BrowserRouter>
-    
   );
 }
 
