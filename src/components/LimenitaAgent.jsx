@@ -3,12 +3,12 @@ import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 // ─────────────────────────────────────────────────────────
-//  Mensaje inicial en local (sin llamada a la API aún)
+//  Mensaje inicial en local 
 // ─────────────────────────────────────────────────────────
 const BIENVENIDA = {
   role: 'assistant',
   content:
-    'Bienvenido a Limeñita. Es un placer atenderte.¿Desea hacer una reserva  personal (familia, cita, amigos) o corporativa (empresa)?',
+    'Bienvenido al Secreto de la Casona. Es un placer atenderte.¿Desea hacer una reserva  personal (familia, cita, amigos) o corporativa (empresa)?',
 };
  const BASEURL = import.meta.env.VITE_BACKEND_URL || '';
 
@@ -65,7 +65,7 @@ const Burbuja = ({ msg, avatarSrc }) => {
         <div className="flex-shrink-0 w-9 h-9 rounded-full overflow-hidden border-2 border-limenita-oro shadow-md">
           <img
             src={avatarSrc}
-            alt="Limeñita"
+            alt="El Secreto de la Casona"
             className="w-full h-full object-cover object-top"
           />
         </div>
@@ -96,7 +96,7 @@ const Typing = ({ avatarSrc }) => (
     <div className="flex-shrink-0 w-9 h-9 rounded-full overflow-hidden border-2 border-yellow-500 shadow-md">
       <img
         src={avatarSrc}
-        alt="Limeñita escribiendo"
+        alt="El Secreto de la Casona escribiendo"
         className="w-full h-full object-cover object-top"
       />
     </div>
@@ -268,14 +268,14 @@ export default function LimenitaAgent({ isOpen, onClose, avatarSrc }) {
               <div className="relative z-10 w-12 h-12 rounded-full overflow-hidden border-2 border-limenita-oro shadow-lg flex-shrink-0">
                 <img
                   src={avatarSrc}
-                  alt="Agente Limeñita"
+                  alt="Agente El Secreto de la Casona"
                   className="w-full h-full object-cover object-top"
                 />
               </div>
 
               <div className="relative z-10 flex flex-col">
                 <span className="font-display text-limenita-crema text-lg leading-tight">
-                  Limeñita
+                  El Secreto de la Casona
                 </span>
                 <span className="font-body text-limenita-crema/70 text-xs tracking-wide">
                   Asistente del restaurante
@@ -361,7 +361,7 @@ export default function LimenitaAgent({ isOpen, onClose, avatarSrc }) {
             {/* Pie discreto */}
             <div className="flex-shrink-0 bg-limenita-taupe text-center py-1.5">
               <span className="font-body text-limenita-taupe/50 text-[10px] tracking-widest uppercase">
-                Restaurante Limeñita · Lima, Perú
+                Restaurante El Secreto de la Casona · Lima, Perú
               </span>
             </div>
           </motion.aside>
