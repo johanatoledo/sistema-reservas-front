@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 const BIENVENIDA = {
   role: "assistant",
   content:
-    "Bienvenido a El Secreto de la Casona. Es un placer atenderle. ¿Desea realizar una reserva personal o corporativa?",
+    "Bienvenido a El Sabor de la Casona. Es un placer atenderle. ¿Desea realizar una reserva personal o corporativa?",
 };
 
 const BASEURL = import.meta.env.VITE_BACKEND_URL || "";
@@ -61,7 +61,7 @@ const Burbuja = ({ msg, avatarSrc }) => {
         <div className="flex-shrink-0 w-9 h-9 rounded-full overflow-hidden border-2 border-limenita-oro shadow-md">
           <img
             src={avatarSrc}
-            alt="El Secreto de la Casona"
+            alt="El Sabor de la Casona"
             className="w-full h-full object-cover object-top"
           />
         </div>
@@ -90,7 +90,7 @@ const Typing = ({ avatarSrc }) => (
     <div className="flex-shrink-0 w-9 h-9 rounded-full overflow-hidden border-2 border-yellow-500 shadow-md">
       <img
         src={avatarSrc}
-        alt="El Secreto de la Casona escribiendo"
+        alt="El Sabor de la Casona escribiendo"
         className="w-full h-full object-cover object-top"
       />
     </div>
@@ -299,7 +299,7 @@ export default function LimenitaAgent({ isOpen, onClose, avatarSrc }) {
               <div className="relative z-10 w-12 h-12 rounded-full overflow-hidden border-2 border-limenita-oro shadow-lg flex-shrink-0">
                 <img
                   src={avatarSrc}
-                  alt="Agente El Secreto de la Casona"
+                  alt="Agente El Sabor de la Casona"
                   className="w-full h-full object-cover object-top"
                 />
               </div>
@@ -388,7 +388,7 @@ export default function LimenitaAgent({ isOpen, onClose, avatarSrc }) {
             {/* Pie discreto */}
             <div className="flex-shrink-0 bg-limenita-taupe text-center py-1.5">
               <span className="font-body text-limenita-taupe/50 text-[10px] tracking-widest uppercase">
-                Restaurante El Secreto de la Casona · Lima, Perú
+                Restaurante El Sabor de la Casona · Lima, Perú
               </span>
             </div>
           </motion.aside>

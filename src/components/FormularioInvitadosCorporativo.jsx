@@ -186,7 +186,7 @@ const idReservaUrl = reservaId;
       
       {/* ENCABEZADO EXCLUSIVO (Sin opciones de Navbar) */}
       <div className="bg-limenita-taupe/10 w-full py-6 flex flex-col items-center justify-center shadow-md mb-8">
-        <h1 className="text-4xl font-serif text-limenita-oro tracking-[0.15em] uppercase">El Secreto de la Casona</h1>
+        <h1 className="text-4xl font-serif text-limenita-oro tracking-[0.15em] uppercase">El Sabor de la Casona</h1>
         <p className="text-limenita-oro text-xs font-bold tracking-[0.3em] mt-2 uppercase text-center px-4">Registro de Invitados Corporativos</p>
       </div>
 

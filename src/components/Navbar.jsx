@@ -41,7 +41,7 @@ const Navbar = ({ onNavClick, onReservaClick, activeSection }) => {
           onClick={() => onNavClick('inicio')}
           className="text-2xl md:text-3xl font-display text-limenita-crema tracking-[0.2em] bg-transparent border-none cursor-pointer"
         >
-          El Secreto de la Casona
+          El Sabor de la Casona
         </button>
 
         {/* Desktop Menu */}
