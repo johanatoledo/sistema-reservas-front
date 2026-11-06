@@ -8,10 +8,10 @@ const Description = ({ imageSrc = entrada, imageAlt = 'Restaurante de comida cri
       {/* Columna de Texto: Se lee primero en móvil y escritorio */}
       <div className="flex-1 order-2 md:order-1">
         <div className="max-w-2xl font-body text-limenita-crema/90 text-lg leading-relaxed">
-         <p className="text-justify">En el corazón del Centro de Lima, dentro de una casona republicana, vive <span className="text-limenita-madera italic">Limeñita</span>: una apasionada de la buena mesa y los grandes encuentros. Aquí, ella abre las puertas de su hogar para invitarte a disfrutar de la cocina que la inspira: esa que nace del fogón criollo, se sazona con cariño y se sirve con orgullo.</p><br />
+         <p className="text-justify">En el corazón del Centro de Lima, dentro de una casona republicana, vive <span className="text-limenita-madera italic">El Sabor de la Casona</span>: una apasionada de la buena mesa y los grandes encuentros. Aquí, ella abre las puertas de su hogar para invitarte a disfrutar de la cocina que la inspira: esa que nace del fogón criollo, se sazona con cariño y se sirve con orgullo.</p><br />
          <p className="text-justify">Cada plato en nuestra carta es una celebración de nuestras raíces , una mezcla de tradición y creatividad que recorre sabores de la costa, la sierra y la selva.</p> <br />       
-         <p className="text-justify">Es la forma en que <span className="text-limenita-madera italic">Limeñita</span> comparte recuerdos, honra recetas de antaño y le da su toque personal a lo que mas ama:recibir, compartir y hacerte sentir como en casa.</p><br />
-         <p className="text-justify">Te invitamos a ser parte de esta experiencia, a sentarte en nuestra mesa y descubrir por qué cada bocado en <span className="text-limenita-madera italic">Limeñita</span> es un viaje al corazón de Lima.</p>
+         <p className="text-justify">Es la forma en que <span className="text-limenita-madera italic">El Sabor de la Casona</span> comparte recuerdos, honra recetas de antaño y le da su toque personal a lo que mas ama:recibir, compartir y hacerte sentir como en casa.</p><br />
+         <p className="text-justify">Te invitamos a ser parte de esta experiencia, a sentarte en nuestra mesa y descubrir por qué cada bocado en <span className="text-limenita-madera italic">El Sabor de la Casona</span> es un viaje al corazón de Lima.</p>
         </div>
       </div>
 

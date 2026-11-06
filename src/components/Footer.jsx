@@ -67,7 +67,7 @@ const Footer = () => (
             
           </a>
         </span>
-        <span>&copy; {new Date().getFullYear()} Limeñita. Todos los derechos reservados.</span>
+        <span>&copy; {new Date().getFullYear()} El Sabor de la Casona . Todos los derechos reservados.</span>
       </div>
     </div>
   </footer>

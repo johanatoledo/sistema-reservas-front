@@ -41,8 +41,8 @@ const Eventos = () => {
       {/* Columna de Texto:a la derecha */}
       <div className="flex-1 order-2 md:order-2">
         <div className="max-w-2xl font-body text-limenita-crema/50 text-lg md:text-l leading-loose space-y-6">
-          <p className="text-justify">En <span className="text-limenita-madera italic">Limeñita</span>, los eventos especiales se viven con el mismo espíritu festivo y acogedor que caracteriza nuestra casa. Nuestro show de danzas típicas es una experiencia vibrante que celebra la riqueza cultural del Perú, fusionando música, color y tradición en cada presentación.</p>
-          <p className="text-justify">Ya sea para una ocasión familiar, una reunión de amigos o un evento corporativo, en <span className="text-limenita-madera italic">Limeñita</span> encontrarás el escenario perfecto para compartir momentos inolvidables. Nuestro equipo se encarga de cada detalle para que tú solo te preocupes por disfrutar.</p>
+          <p className="text-justify">En <span className="text-limenita-madera italic">El Sabor de la Casona</span>, los eventos especiales se viven con el mismo espíritu festivo y acogedor que caracteriza nuestra casa. Nuestro show de danzas típicas es una experiencia vibrante que celebra la riqueza cultural del Perú, fusionando música, color y tradición en cada presentación.</p>
+          <p className="text-justify">Ya sea para una ocasión familiar, una reunión de amigos o un evento corporativo, en <span className="text-limenita-madera italic">El Sabor de la Casona</span> encontrarás el escenario perfecto para compartir momentos inolvidables. Nuestro equipo se encarga de cada detalle para que tú solo te preocupes por disfrutar.</p>
           <p className="text-justify">Ven todos los domingos  y déjate sorprender por la magia de la danza, la gastronomía y la hospitalidad limeña en un solo lugar.</p>
         </div>
       </div>
