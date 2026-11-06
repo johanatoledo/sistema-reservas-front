@@ -163,8 +163,10 @@ export default function LimenitaAgent({ isOpen, onClose, avatarSrc }) {
         'Content-Type': 'application/json',
         'Bypass-Tunnel-Reminder': 'true'
       }, 
-      body: JSON.stringify({
-        messages: historial.map(({ role, content }) => ({ role, content })),
+       body: JSON.stringify({
+       messages: historial
+       .filter((msg) => msg !== BIENVENIDA)
+       .map(({ role, content }) => ({ role, content })),
       }),
     });
     
@@ -274,7 +276,7 @@ export default function LimenitaAgent({ isOpen, onClose, avatarSrc }) {
               </div>
 
               <div className="relative z-10 flex flex-col">
-                <span className="font-display text-limenita-crema text-lg leading-tight">
+                <span className="font-display text-limenita-crema text-xl leading-tight">
                   El Secreto de la Casona
                 </span>
                 <span className="font-body text-limenita-crema/70 text-xs tracking-wide">
