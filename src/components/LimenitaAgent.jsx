@@ -1,21 +1,19 @@
-// src/components/chatbot/LimenitaAgent.jsx
-import React, { useEffect, useRef, useState, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
 
-// ─────────────────────────────────────────────────────────
-//  Mensaje inicial en local 
-// ─────────────────────────────────────────────────────────
+import React, { useEffect, useRef, useState, useCallback } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
 const BIENVENIDA = {
-  role: 'assistant',
+  role: "assistant",
   content:
-    'Bienvenido al Secreto de la Casona. Es un placer atenderte.¿Desea hacer una reserva  personal (familia, cita, amigos) o corporativa (empresa)?',
+    "Bienvenido a El Secreto de la Casona. Es un placer atenderle. ¿Desea realizar una reserva personal o corporativa?",
 };
- const BASEURL = import.meta.env.VITE_BACKEND_URL || '';
 
+const BASEURL = import.meta.env.VITE_BACKEND_URL || "";
 
- const renderContentWithLinks = (text = '') => {
+const crearSesion = () => crypto.randomUUID();
+
+const renderContentWithLinks = (text = "") => {
   const markdownLinkRegex = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g;
-
   const parts = [];
   let lastIndex = 0;
   let match;
@@ -48,18 +46,16 @@ const BIENVENIDA = {
 
   return parts;
 };
-// ─────────────────────────────────────────────────────────
-//  Burbuja de mensaje
-// ─────────────────────────────────────────────────────────
+
 const Burbuja = ({ msg, avatarSrc }) => {
-  const esBot = msg.role === 'assistant';
+  const esBot = msg.role === "assistant";
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 8 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.25 }}
-      className={`flex items-end gap-2 ${esBot ? 'justify-start' : 'justify-end'}`}
+      className={`flex items-end gap-2 ${esBot ? "justify-start" : "justify-end"}`}
     >
       {esBot && (
         <div className="flex-shrink-0 w-9 h-9 rounded-full overflow-hidden border-2 border-limenita-oro shadow-md">
@@ -74,8 +70,8 @@ const Burbuja = ({ msg, avatarSrc }) => {
       <div
         className={`max-w-[78%] px-4 py-3 text-sm font-body leading-relaxed shadow-sm ${
           esBot
-            ? 'bg-white text-limenita-madera rounded-t-2xl rounded-br-2xl rounded-bl-sm border-l-4 border-limenita-zafiro'
-            : 'bg-limenita-zafiro text-limenita-crema rounded-t-2xl rounded-bl-2xl rounded-br-sm'
+            ? "bg-white text-limenita-madera rounded-t-2xl rounded-br-2xl rounded-bl-sm border-l-4 border-limenita-zafiro"
+            : "bg-limenita-zafiro text-limenita-crema rounded-t-2xl rounded-bl-2xl rounded-br-sm"
         }`}
       >
         {esBot ? renderContentWithLinks(msg.content) : msg.content}
@@ -83,9 +79,7 @@ const Burbuja = ({ msg, avatarSrc }) => {
     </motion.div>
   );
 };
-// ─────────────────────────────────────────────────────────
-//  Indicador de escritura (tres puntos animados)
-// ─────────────────────────────────────────────────────────
+
 const Typing = ({ avatarSrc }) => (
   <motion.div
     initial={{ opacity: 0, y: 6 }}
@@ -124,117 +118,155 @@ const Typing = ({ avatarSrc }) => (
   </motion.div>
 );
 
-// ─────────────────────────────────────────────────────────
-//  Componente principal
-// ─────────────────────────────────────────────────────────
 export default function LimenitaAgent({ isOpen, onClose, avatarSrc }) {
-  const [messages, setMessages]       = useState([BIENVENIDA]);
-  const [input, setInput]             = useState('');
-  const [loading, setLoading]         = useState(false);
-  const bottomRef                     = useRef(null);
-  const inputRef                      = useRef(null);
+  const [messages, setMessages] = useState([BIENVENIDA]);
+  const [input, setInput] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [sessionId] = useState(crearSesion);
+  const [reservaEstado, setReservaEstado] = useState("recopilando");
 
+  const bottomRef = useRef(null);
+  const inputRef = useRef(null);
+  const loadingRef = useRef(false);
+  const messagesRef = useRef([BIENVENIDA]);
+  const abortRef = useRef(null);
 
-  // Auto-scroll al último mensaje
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    messagesRef.current = messages;
+  }, [messages]);
+
+  useEffect(() => {
+    bottomRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages, loading]);
 
-  // Al abrir: bloquear scroll del body
   useEffect(() => {
     if (isOpen) {
-      document.body.style.overflow = 'hidden';
-      // Focus en el input después de la animación de entrada
-      setTimeout(() => inputRef.current?.focus(), 350);
-    } else {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "hidden";
+      const focusTimer = setTimeout(() => inputRef.current?.focus(), 350);
+
+      return () => {
+        clearTimeout(focusTimer);
+        document.body.style.overflow = "";
+      };
     }
-    return () => { document.body.style.overflow = ''; };
+
+    document.body.style.overflow = "";
+
+    return () => {
+      document.body.style.overflow = "";
+    };
   }, [isOpen]);
 
-  // ── Llamada al backend ─────────────────────────────────
-  const llamarApi = useCallback(async (historial) => {
-    console.log('🔌 Iniciando llamada a API con historial:', historial);
-    
-    const response = await fetch(`${BASEURL}/api/chat`, {
-      method: 'POST',
-      mode: 'cors',
-      headers: { 
-        'Content-Type': 'application/json',
-        'Bypass-Tunnel-Reminder': 'true'
-      }, 
-       body: JSON.stringify({
-       messages: historial
-       .filter((msg) => msg !== BIENVENIDA)
-       .map(({ role, content }) => ({ role, content })),
-      }),
-    });
-    
-    console.log('📡 Respuesta del servidor:', response.status);
-    
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`);
-    }
-    
-    const data = await response.json();
-    console.log('📥 Datos recibidos:', data);
-
-    return (
-      data?.result?.content ||
-      'Disculpe, no pude procesar su solicitud. ¿Podría repetirla?'
-    );
+  useEffect(() => {
+    return () => {
+      abortRef.current?.abort();
+    };
   }, []);
 
- 
-  const enviarMensaje = async (textoInput) => {
-    const texto = (textoInput || input).trim();
-    console.log('🚀 enviarMensaje llamado con:', texto, 'loading:', loading);
-    
-    if (!texto || loading) {
-      console.log('⚠️ Mensaje vacío o ya estoy cargando, saliendo');
-      return;
+  const llamarApi = useCallback(async (historial, signal) => {
+    const response = await fetch(`${BASEURL}/api/chat`, {
+      method: "POST",
+      mode: "cors",
+      headers: {
+        "Content-Type": "application/json",
+        "Bypass-Tunnel-Reminder": "true",
+      },
+      body: JSON.stringify({
+        sessionId,
+        messages: historial
+          .filter((msg) => msg !== BIENVENIDA)
+          .map(({ role, content }) => ({ role, content })),
+      }),
+      signal,
+    });
+
+    const data = await response.json().catch(() => null);
+
+    if (!response.ok) {
+      throw new Error(
+        data?.error || `Error de comunicación HTTP ${response.status}`
+      );
     }
 
-    const nuevoHistorial = [...messages, { role: 'user', content: texto }];
-    setMessages(nuevoHistorial);
-    setInput('');
+    if (typeof data?.result?.content !== "string") {
+      throw new Error("Respuesta inválida del asistente.");
+    }
+
+    return {
+      content: data.result.content,
+      estado: data.estado || "recopilando",
+    };
+  }, [sessionId]);
+
+  const enviarMensaje = async (textoInput) => {
+    const texto = (textoInput ?? input).trim();
+
+    if (!texto || loadingRef.current) return;
+
+    loadingRef.current = true;
     setLoading(true);
-    console.log('✅ Loading set a TRUE');
+    setInput("");
+
+    const nuevoHistorial = [
+      ...messagesRef.current,
+      { role: "user", content: texto },
+    ];
+
+    messagesRef.current = nuevoHistorial;
+    setMessages(nuevoHistorial);
+
+    const controller = new AbortController();
+    abortRef.current = controller;
 
     try {
-      console.log('📤 Enviando mensaje:', texto);
-      const respuesta = await llamarApi(nuevoHistorial);
-      console.log('📥 Respuesta recibida:', respuesta);
-      setMessages((prev) => [...prev, { role: 'assistant', content: respuesta }]);
+      const respuesta = await llamarApi(
+        nuevoHistorial,
+        controller.signal
+      );
+
+      const mensajeAgente = {
+        role: "assistant",
+        content: respuesta.content,
+      };
+
+      messagesRef.current = [
+        ...messagesRef.current,
+        mensajeAgente,
+      ];
+
+      setMessages(messagesRef.current);
+      setReservaEstado(respuesta.estado);
     } catch (error) {
-      console.error('❌ Error en llamarApi:', error);
-      console.error('Detalles:', error.message);
-      
-      setMessages((prev) => [
-        ...prev,
-        {
-          role: 'assistant',
+      if (error.name !== "AbortError") {
+        console.error("Error del agente:", error);
+
+        const mensajeError = {
+          role: "assistant",
           content:
-            'Disculpe, hubo un inconveniente técnico. Por favor intente de nuevo en un momento.',
-        },
-      ]);
+            "Disculpe, hubo un inconveniente técnico. Por favor, inténtelo nuevamente en un momento.",
+        };
+
+        messagesRef.current = [
+          ...messagesRef.current,
+          mensajeError,
+        ];
+
+        setMessages(messagesRef.current);
+      }
     } finally {
+      loadingRef.current = false;
       setLoading(false);
-      console.log('✅ Loading set a FALSE');
+      abortRef.current = null;
     }
   };
 
-   
-
-  // ── Manejador de teclas ─────────────────────────────────────────────
   const handleKey = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
+    if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       enviarMensaje();
     }
   };
 
-  // ── Render ─────────────────────────────────────────────
   return (
     <AnimatePresence>
       {isOpen && (
@@ -251,22 +283,19 @@ export default function LimenitaAgent({ isOpen, onClose, avatarSrc }) {
           {/* Panel del agente */}
           <motion.aside
             className="fixed bottom-0 right-0 z-50 flex flex-col w-full max-w-sm h-[90dvh] max-h-[680px] m-0 sm:m-6 sm:rounded-2xl overflow-hidden shadow-2xl"
-            style={{ background: '#F3E5DC' }} // limenita-crema
+            style={{ background: "#F3E5DC" }}
             initial={{ opacity: 0, y: 60, scale: 0.97 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 60, scale: 0.97 }}
-            transition={{ type: 'spring', stiffness: 340, damping: 30 }}
+            transition={{ type: "spring", stiffness: 340, damping: 30 }}
           >
-
-            {/* ── HEADER ──────────────────────────────── */}
+            {/* HEADER */}
             <header className="relative flex items-center gap-3 px-4 py-3 bg-limenita-taupe flex-shrink-0">
-            
               <div
                 className="absolute inset-0 opacity-10 bg-repeat"
-                style={{ background: '#F3E5DC'}}
+                style={{ background: "#F3E5DC" }}
               />
 
-              {/* Avatar grande en el header */}
               <div className="relative z-10 w-12 h-12 rounded-full overflow-hidden border-2 border-limenita-oro shadow-lg flex-shrink-0">
                 <img
                   src={avatarSrc}
@@ -284,13 +313,13 @@ export default function LimenitaAgent({ isOpen, onClose, avatarSrc }) {
                 </span>
               </div>
 
-              {/* Indicador online */}
               <div className="relative z-10 ml-auto flex items-center gap-1.5">
                 <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                <span className="font-body text-limenita-crema/70 text-xs">En línea</span>
+                <span className="font-body text-limenita-crema/70 text-xs">
+                  En línea
+                </span>
               </div>
 
-              {/* Botón cerrar */}
               <button
                 onClick={onClose}
                 aria-label="Cerrar chat"
@@ -300,27 +329,24 @@ export default function LimenitaAgent({ isOpen, onClose, avatarSrc }) {
               </button>
             </header>
 
-            {/* ── MENSAJES ────────────────────────────── */}
-            <div className="flex-1 overflow-y-auto px-4 py-4 space-y-3 bg-[#F3E5DC]"
+            {/* MENSAJES */}
+            <div
+              className="flex-1 overflow-y-auto px-4 py-4 space-y-3 bg-[#F3E5DC]"
               style={{
                 backgroundImage:
-                  'linear-gradient(to bottom, rgba(243,229,220,0.95), rgba(243,229,220,0.95)), url(/src/assets-optimized/texture/damasco-limeñita.webp)',
-                backgroundRepeat: 'repeat',
+                  "linear-gradient(to bottom, rgba(243,229,220,0.95), rgba(243,229,220,0.95)), url(/src/assets-optimized/texture/damasco-limeñita.webp)",
+                backgroundRepeat: "repeat",
               }}
             >
               {messages.map((msg, i) => (
                 <Burbuja key={i} msg={msg} avatarSrc={avatarSrc} />
               ))}
 
-              {/* 🔧 INDICADOR DE ESCRITURA - SIN AnimatePresence */}
-              {loading && (
-                <Typing avatarSrc={avatarSrc} />
-              )}
-
+              {loading && <Typing avatarSrc={avatarSrc} />}
               <div ref={bottomRef} />
             </div>
-            
-            {/* ── INPUT ───────────────────────────────── */}
+
+            {/* INPUT */}
             <div className="flex-shrink-0 border-t border-limenita-taupe/30 bg-white px-3 py-3 flex items-end gap-2">
               <textarea
                 ref={inputRef}
@@ -328,9 +354,9 @@ export default function LimenitaAgent({ isOpen, onClose, avatarSrc }) {
                 value={input}
                 onChange={(e) => {
                   setInput(e.target.value);
-                  // Auto-resize hasta 3 líneas
-                  e.target.style.height = 'auto';
-                  e.target.style.height = Math.min(e.target.scrollHeight, 80) + 'px';
+                  e.target.style.height = "auto";
+                  e.target.style.height =
+                    Math.min(e.target.scrollHeight, 80) + "px";
                 }}
                 onKeyDown={handleKey}
                 placeholder="Escriba su mensaje…"
@@ -344,7 +370,6 @@ export default function LimenitaAgent({ isOpen, onClose, avatarSrc }) {
                 aria-label="Enviar mensaje"
                 className="flex-shrink-0 w-9 h-9 rounded-full bg-limenita-zafiro hover:bg-limenita-madera disabled:opacity-40 disabled:cursor-not-allowed transition flex items-center justify-center shadow"
               >
-                {/* Icono de envío SVG inline */}
                 <svg
                   viewBox="0 0 24 24"
                   fill="none"
