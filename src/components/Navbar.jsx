@@ -16,7 +16,7 @@ const Navbar = ({ onNavClick, onReservaClick, activeSection }) => {
     { name: 'INICIO', id: 'inicio' },
     { name: 'NUESTRA CARTA', id: 'carta' },
     { name: 'RESERVAR', id: 'reserva', isButton: true },
-    { name: 'VER RESERVAS', id: 'asistente' },
+    
   ];
 
   const handleLinkClick = (link) => {
@@ -41,7 +41,7 @@ const Navbar = ({ onNavClick, onReservaClick, activeSection }) => {
           onClick={() => onNavClick('inicio')}
           className="text-2xl md:text-3xl font-display text-limenita-crema tracking-[0.2em] bg-transparent border-none cursor-pointer"
         >
-          LIMEÑITA
+          El Secreto de la Casona
         </button>
 
         {/* Desktop Menu */}
