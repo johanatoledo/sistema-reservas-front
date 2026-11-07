@@ -2,8 +2,8 @@ import fs from "fs";
 import path from "path";
 import sharp from "sharp";
 
-const inputDir = path.resolve("src/assets");
-const outputDir = path.resolve("src/assets-optimized");
+const inputDir = path.resolve("public/assets");
+const outputDir = path.resolve("public/assets-optimized");
 
 const imageExtensions = [".jpg", ".jpeg", ".png"];
 

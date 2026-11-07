@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react';
-import baileShow from '../assets-optimized/videos/baileShow-optimizado.mp4';
+import cantanteCasona from '/assets/videos/video-cantantes-casona.mp4';
 
 
 
@@ -28,7 +28,7 @@ const Eventos = () => {
           <div className="relative z-10 w-full h-full rounded-sm shadow-2xl border-4 border-limenita-taupe overflow-hidden grayscale-[30%] hover:grayscale-0 transition-all duration-10">
             <video 
               ref={videoRef}
-              src={baileShow} 
+              src={cantanteCasona} 
               autoPlay
               loop
               muted

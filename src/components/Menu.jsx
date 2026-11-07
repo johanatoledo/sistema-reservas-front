@@ -3,53 +3,44 @@ import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 
-// AVIF
-import causaAvif from '../assets-optimized/plates-drinks/causa.avif';
-import cevicheAvif from '../assets-optimized/plates-drinks/ceviche.avif';
-import lomosaltadoAvif from '../assets-optimized/plates-drinks/lomosaltado.avif';
-import postrelimenoAvif from '../assets-optimized/plates-drinks/postres-limeña.avif';
-import picaronesAvif from '../assets-optimized/plates-drinks/picarones-limeños.avif';
-import pulpOlivoAvif from '../assets-optimized/plates-drinks/pulpo-al-olivo.avif';
-import spaguettiLomoSaltadoAvif from '../assets-optimized/plates-drinks/spaguetti-lomosaltado.avif';
-import bebidasnaturalesAvif from '../assets-optimized/plates-drinks/bebidasnaturales.avif';
-import coctelesAvif from '../assets-optimized/plates-drinks/cocteles.avif';
-import tonicAvif from '../assets-optimized/plates-drinks/tonic.avif';
-import chilcanoAvif from '../assets-optimized/plates-drinks/chilcano.avif';
-import coctelAvif from '../assets-optimized/plates-drinks/coctel.avif';
-import piscosourAvif from '../assets-optimized/plates-drinks/pisco-sour.avif';
-
-
-// WEBP
-import causaWebp from '../assets-optimized/plates-drinks/causa.webp';
-import cevicheWebp from '../assets-optimized/plates-drinks/ceviche.webp';
-import lomosaltadoWebp from '../assets-optimized/plates-drinks/lomosaltado.webp';
-import postrelimenoWebp from '../assets-optimized/plates-drinks/postres-limeña.webp';
-import picaronesWepb from '../assets-optimized/plates-drinks/picarones-limeños.webp';
-import pulpOlivoWepb from '../assets-optimized/plates-drinks/pulpo-al-olivo.webp';
-import spaguettiLomoSaltadoWepb from '../assets-optimized/plates-drinks/spaguetti-lomosaltado.webp';
-import bebidasnaturalesWebp from '../assets-optimized/plates-drinks/bebidasnaturales.webp';
-import coctelesWebp from '../assets-optimized/plates-drinks/cocteles.webp';
-import tonicWebp from '../assets-optimized/plates-drinks/tonic.webp';
-import chilcanoWebp from '../assets-optimized/plates-drinks/chilcano.webp';
-import coctelWebp from '../assets-optimized/plates-drinks/coctel.webp';
-import piscosourWepb from '../assets-optimized/plates-drinks/pisco-sour.webp';
+import causaWebp from '/assets/plates-drinks/causa.webp';
+import cevicheWebp from '/assets/plates-drinks/ceviche.webp';
+import lomosaltadoWebp from '/assets/plates-drinks/lomosaltado.webp';
+import postrelimenoWebp from '/assets/plates-drinks/postres-limeña.webp';
+import picaronesWepb from '/assets/plates-drinks/picarones-limeños.webp';
+import pulpOlivoWepb from '/assets/plates-drinks/pulpo-al-olivo.webp';
+import spaguettiLomoSaltadoWepb from '/assets/plates-drinks/spaguetti-lomosaltado.webp';
+import bebidasnaturalesWebp from '/assets/plates-drinks/bebidasnaturales.webp';
+import coctelesWebp from '/assets/plates-drinks/cocteles.webp';
+import tonicWebp from '/assets/plates-drinks/tonic.webp';
+import chilcanoWebp from '/assets/plates-drinks/chilcano.webp';
+import coctelWebp from '/assets/plates-drinks/coctel.webp';
+import piscosourWepb from '/assets/plates-drinks/pisco-sour.webp';
+import churrosWepb from '/assets/plates-drinks/churros-con-helado.webp';
+import heladoWepb from '/assets/plates-drinks/helado-de-temporada.webp';
+import tartaquesoWebp from '/assets/plates-drinks/tarta-de-queso.webp';
+import corazonWebp from '/assets/plates-drinks/corazon-casona.webp';
 
 
 
 const IMAGES = {
-  causa: { avif: causaAvif, webp: causaWebp },
-  ceviche: { avif: cevicheAvif, webp: cevicheWebp },
-  lomosaltado: { avif: lomosaltadoAvif, webp: lomosaltadoWebp },
-  postrelimeno: { avif: postrelimenoAvif, webp: postrelimenoWebp },
-  picarones: { avif: picaronesAvif, webp: picaronesWepb },
-  pulpOlivo: { avif: pulpOlivoAvif, webp: pulpOlivoWepb },
-  spaguettiLomoSaltado: { avif: spaguettiLomoSaltadoAvif, webp: spaguettiLomoSaltadoWepb },
-  piscosour: { avif: piscosourAvif, webp: piscosourWepb },
-  bebidasnaturales: { avif: bebidasnaturalesAvif, webp: bebidasnaturalesWebp },
-  cocteles: { avif: coctelesAvif, webp: coctelesWebp },
-  tonic: { avif: tonicAvif, webp: tonicWebp },
-  chilcano: { avif: chilcanoAvif, webp: chilcanoWebp },
-  coctel: { avif: coctelAvif, webp: coctelWebp },
+  causa: {  webp: causaWebp },
+  ceviche: { webp: cevicheWebp },
+  lomosaltado: { webp: lomosaltadoWebp },
+  postrelimeno: { webp: postrelimenoWebp },
+  picarones: { webp: picaronesWepb },
+  pulpOlivo: { webp: pulpOlivoWepb },
+  spaguettiLomoSaltado: { webp: spaguettiLomoSaltadoWepb },
+  piscosour: { webp: piscosourWepb },
+  bebidasnaturales: { webp: bebidasnaturalesWebp },
+  cocteles: { webp: coctelesWebp },
+  tonic: { webp: tonicWebp },
+  chilcano: { webp: chilcanoWebp },
+  coctel: { webp: coctelWebp },
+  churros: { webp: churrosWepb },
+  helado: { webp: heladoWepb },
+  tartaqueso: { webp: tartaquesoWebp },
+  corazon: { webp: corazonWebp },
 };
 
 
@@ -91,10 +82,10 @@ const menuData = {
   ],
   'El Broche de Oro': [ 
     { name: 'PICARONES', description: 'Tradicionales y bañados en miel chancaca.', price: 19, photo: IMAGES.picarones },
-    { name: 'HELADO DE TEMPORADA', description: 'Artesanal y refrescante, acompañado de trozos de brownie.', price: 20, photo: IMAGES.postrelimeno },
-    { name: 'TARTA DE QUESO', description: 'Suave y cremosa, elaborada con mezcla de quesos peruanos sobre base crocante de galleta.', price: 25, photo: IMAGES.postrelimeno },
-    { name: 'CORAZÓN LIMEÑITA', description: 'Corazón de chocolate relleno con suspiro de chirimoya.', price: 28, photo: IMAGES.postrelimeno},
-    { name: 'CHURROS CON HELADO', description: 'Crujientes churros recien hechos, espolvoreados con azúcar y canela, servidos con una bola  de helado de tiramisú.', price: 20, photo: IMAGES.postrelimeno },
+    { name: 'HELADO DE TEMPORADA', description: 'Artesanal y refrescante, acompañado de trozos de brownie.', price: 20, photo: IMAGES.helado },
+    { name: 'TARTA DE QUESO', description: 'Suave y cremosa, elaborada con mezcla de quesos peruanos sobre base crocante de galleta.', price: 25, photo: IMAGES.tartaqueso },
+    { name: 'CORAZÓN El SABOR DE LA CASONA', description: 'Corazón de chocolate relleno con suspiro de chirimoya.', price: 28, photo: IMAGES.corazon },
+    { name: 'CHURROS CON HELADO', description: 'Crujientes churros recien hechos, espolvoreados con azúcar y canela, servidos con una bola  de helado de tiramisú.', price: 20, photo: IMAGES.churros },
   ],
   'Guarniciones': [
     { name: 'GUARNICION 1', description: 'Arroz blanco con choclito', price: 8 },

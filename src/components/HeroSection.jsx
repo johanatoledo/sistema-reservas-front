@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import bannerImg from '../assets-optimized/banner-la-casona.png';
+import bannerImg from '/assets/banner-la-casona.webp';
 
 const HeroSection = () => {
   return (

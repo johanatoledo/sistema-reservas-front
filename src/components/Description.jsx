@@ -1,5 +1,5 @@
 import React from 'react';
-import entrada from '../assets-optimized/entrada1.avif';
+import entrada from '/assets/description-casona.webp';
 
 
 const Description = ({ imageSrc = entrada, imageAlt = 'Restaurante de comida criolla limeña' }) => {

@@ -39,7 +39,7 @@ export const menuData = {
     { name: 'PICARONES', description: 'Tradicionales y bañados en miel chancaca.', price: 19 },
     { name: 'HELADO DE TEMPORADA', description: 'Artesanal y refrescante, acompañado de trozos de brownie.', price: 20 },
     { name: 'TARTA DE QUESO', description: 'Suave y cremosa, elaborada con mezcla de quesos peruanos sobre base crocante de galleta.', price: 25 },
-    { name: 'CORAZÓN LIMEÑITA', description: 'Corazón de chocolate relleno con suspiro de chirimoya.', price: 28 },
+    { name: 'CORAZÓN EL SABOR DE LA CASONA', description: 'Corazón de chocolate relleno con suspiro de chirimoya.', price: 28 },
     { name: 'CHURROS CON HELADO', description: 'Crujientes churros recien hechos, espolvoreados con azúcar y canela, servidos con una bola  de helado de tiramisú.', price: 20},
   ],
   'Guarniciones': [

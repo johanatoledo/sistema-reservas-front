@@ -7,8 +7,8 @@ ffmpeg.setFfmpegPath(
   "C:\\Users\\sfeoa\\AppData\\Local\\Microsoft\\WinGet\\Packages\\Gyan.FFmpeg_Microsoft.Winget.Source_8wekyb3d8bbwe\\ffmpeg-8.1-full_build\\bin\\ffmpeg.exe"
 );
 
-const inputDir = path.resolve("src/assets");
-const outputDir = path.resolve("src/assets-optimized");
+const inputDir = path.resolve("public/assets");
+const outputDir = path.resolve("public/assets-optimized");
 
 const videoExtensions = [".mp4", ".mov"];
 
