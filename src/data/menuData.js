@@ -1,7 +1,14 @@
 
 
 export const menuData = {
-  'Sabores que dan La Bienvenida': [
+  'Postres': [ 
+    { name: 'PICARONES', description: 'Tradicionales y bañados en miel chancaca.', price: 19 },
+    { name: 'HELADO DE TEMPORADA', description: 'Artesanal y refrescante, acompañado de trozos de brownie.', price: 20 },
+    { name: 'TARTA DE QUESO', description: 'Suave y cremosa, elaborada con mezcla de quesos peruanos sobre base crocante de galleta.', price: 25 },
+    { name: 'CORAZÓN EL SABOR DE LA CASONA', description: 'Corazón de chocolate relleno con suspiro de chirimoya.', price: 28 },
+    { name: 'CHURROS CON HELADO', description: 'Crujientes churros recien hechos, espolvoreados con azúcar y canela, servidos con una bola  de helado de tiramisú.', price: 20},
+  ],
+  'Entradas': [
     { name: 'OCOPA LIMEÑA', description: 'Papa Amarilla con nuestra clasica salsa huacatay,queso fresco,huevo y aceituna, con toques dulces', price: 20 },
     { name: 'PAPA A LA HUANCAINA', description: 'Clásica y sabrosa, preparada con ají amarillo cremoso y queso fresco. Porción generosa para compartir', price: 20 },
     { name: 'CAUSA LIMEÑA', description: 'Suave masa de papa amarilla mangueada, rellena con pollo en mayonesa casera. Acompañada con palta,aceituna,huevito de codorniz, hilos de camote crocante', price: 25 },
@@ -11,7 +18,7 @@ export const menuData = {
     { name: 'CONCHAS AL FUEGO', description: 'Conchas frescas gratinadas con mantequilla, ajo y queso paria derretido. Un bocado intenso que une mar y sierra', price: 35 },
     { name: 'PULPO AL OLIVO', description: 'Pulpo tierno con crema de aceitunas negras y un toque acevichado. Acompañado de galletas de soda y palta para equilibrar sabores.', price: 45 },
 ],
-  'Herencia Marina': [
+  'Platos Marinos': [
     { name: 'LECHE DE TIGRE', description: 'Jugo de ceviche a base ded ají amarillo y pasta de rocoto, acompañado de chicharron de pota.', price: 25 },
     { name: 'CEVICHE DE PESCADO', description: 'Pescado del día marinado al limón y ají limo, acompañado de cebolla en juliana, choclo y camote dulce.', price: 45 },
     { name: 'CHICHARRON DE PESCADO', description: 'Trozo de pescado crocantes al panko, acompañado de yuca frita, sarsa criolla y tártara.', price: 40},
@@ -24,7 +31,7 @@ export const menuData = {
     { name: 'DUO MARINO 2', description: ' Ceviche clásico + chaufa de mariscos', price: 45 },
     { name: 'DUO MARINO 3', description: ' Ceviche clásico + chicharrón de pescado', price: 50},
   ],
-  'La mesa de Limenita': [
+  'Platos de la Casa': [
     { name: 'SPAGHETTI A LA HUANCAINA CON LOMO SALTADO', description: 'Lomo fino, servido sobre unos cremosos spaghetti a la huancaína.', price: 55 },
     { name: 'CHAUFA CON PANCETA EN SALSA ORIENTAL', description: 'Chaufa con panceta crujiente en salsa oriental dulce, con el toque del wok que realza su sabor', price: 35 },
     { name: 'SECO NORTEÑO', description: 'Asado de tira de res acompañado con cremosos frejoles y arroz', price: 55 },
@@ -34,13 +41,6 @@ export const menuData = {
     { name: 'POLLO CRIOLLO AL ESTILO LIMEÑITA', description: 'Servido con papas nativas, choclito y ensalada mixta de col, acompañado con una salsa de ocopa', price: 35 },
     { name: 'ARROZ CON PATO', description: 'Preparado al estilo del norte, con culantro fresco, ají amarillo y loche. Servido con pato jugoso y su infaltable chalaquita criolla', price: 60},
     { name: 'LOMO SALTADO CLÁSICO', description: 'Lomo fino salteado con verduras, acompañado de papas nativas fritas y arroz', price: 50 },
-  ],
-  'El Broche de Oro': [ 
-    { name: 'PICARONES', description: 'Tradicionales y bañados en miel chancaca.', price: 19 },
-    { name: 'HELADO DE TEMPORADA', description: 'Artesanal y refrescante, acompañado de trozos de brownie.', price: 20 },
-    { name: 'TARTA DE QUESO', description: 'Suave y cremosa, elaborada con mezcla de quesos peruanos sobre base crocante de galleta.', price: 25 },
-    { name: 'CORAZÓN EL SABOR DE LA CASONA', description: 'Corazón de chocolate relleno con suspiro de chirimoya.', price: 28 },
-    { name: 'CHURROS CON HELADO', description: 'Crujientes churros recien hechos, espolvoreados con azúcar y canela, servidos con una bola  de helado de tiramisú.', price: 20},
   ],
   'Guarniciones': [
     { name: 'GUARNICION 1', description: 'Arroz blanco con choclito', price: 8 },

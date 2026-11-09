@@ -306,10 +306,10 @@ export default function LimenitaAgent({ isOpen, onClose, avatarSrc }) {
 
               <div className="relative z-10 flex flex-col">
                 <span className="font-display text-limenita-crema text-xl leading-tight">
-                  El Secreto de la Casona
+                  El Sabor de la Casona
                 </span>
                 <span className="font-body text-limenita-crema/70 text-xs tracking-wide">
-                  Asistente del restaurante
+                  Asistente de reservas
                 </span>
               </div>
 
